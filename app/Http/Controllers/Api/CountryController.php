@@ -43,9 +43,24 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $value)
     {
-        
+        $country = Country::with('statistic')
+        ->where('country_name', 'like', $value . '%')
+        ->get();
+
+        if ($country->isEmpty()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'No countries found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Countries data retrieved successfully',
+            'data' => $country
+        ], 200);
     }
 
     /**
