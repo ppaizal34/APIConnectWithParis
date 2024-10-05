@@ -32,6 +32,15 @@ class CountryController extends Controller
         }      
     }
 
+    public function random()
+    {
+        $country = Country::inRandomOrder()->first();
+
+        return response()->json([
+            'data' => $country
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -49,11 +58,11 @@ class CountryController extends Controller
         ->where('country_name', 'like', $value . '%')
         ->get();
 
-        if ($country->isEmpty()) {
+        if($country->isEmpty()){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'No countries found'
-            ], 404);
+                'message' => 'Failed to retrieve data',
+            ]);
         }
 
         return response()->json([
