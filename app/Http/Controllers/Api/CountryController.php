@@ -34,9 +34,11 @@ class CountryController extends Controller
 
     public function random()
     {
-        $country = Country::inRandomOrder()->first();
+        $country = Country::with('statistic')->inRandomOrder()->first();
 
         return response()->json([
+            'status' => 'success',
+            'message' => 'Countries data retrieved successfully',
             'data' => $country
         ]);
     }
