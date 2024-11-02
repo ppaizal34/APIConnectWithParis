@@ -4,38 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carousel Template · Bootstrap v5.3</title>
+    <title>APIConnectWithParis</title>
     {{-- CDN Bootsrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Link carousel.css -->
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#about-scroll">
     <header data-bs-theme="dark">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Carousel</a>
+        <nav id="about-scroll" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid px-5">
+                {{-- Brand --}}
+                <a class="navbar-brand fs-2 text-primary fw-bold" href="#">APIConnectWithParis</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" href="#">
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#about">
+                                About
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            <a class="nav-link">
+                                Contact
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/login') }}">
+                                Login
+                            </a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
@@ -54,18 +62,23 @@
             <div class="carousel-inner">
                 {{-- carousel 1 --}}
                 <div class="carousel-item active">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
+                    <img src="{{ asset('assets/images_api/5.jpg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="nation.png">
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h1>Example headline.</h1>
-                            <p class="opacity-75">Some representative placeholder content for the first slide of the
-                                carousel.</p>
+                            <h1>Nations API</h1>
+                            <figure class="d-flex">
+                                <img src="{{ asset('assets/images_api/avatar/nation.png') }}" class="rounded-circle" alt="avatar_nation.png" width="50" height="30"> 
+                                <figcaption class="ms-3">
+                                    PENYEDIA DATA / SUMBER INFORMASI / PUSAT DATA GLOBAL
+                                </figcaption>
+                            </figure>
+                            <p>
+                               Melalui APIConnectWithParis,anda dapat mengeksplorasi data detail dan komprehensif dari berbagai negara
+                               di seluruh dunia,mulai dari populasi,ibu kota,hingga status kedaulatan dan keanggotaan global.
+                            </p>
                             <p>
                                 <a class="btn btn-lg btn-primary" href="#">
-                                    Learn more
+                                    Get Documention
                                 </a>
                             </p>
                         </div>
@@ -73,17 +86,22 @@
                 </div>
                 {{-- carousel 2 --}}
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
+                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="">
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h1>Another example headline.</h1>
-                            <p>Some representative placeholder content for the second slide of the carousel.</p>
+                            <h1>Images API</h1>
+                            <figure class="d-flex">
+                                <img src="{{ asset('assets/images_api/avatar/nation.png') }}" class="rounded-circle" alt="avatar_nation.png" width="50" height="30"> 
+                                <figcaption class="ms-3">
+                                    PENYEDIA DATA / SUMBER INFORMASI / PUSAT DATA GLOBAL
+                                </figcaption>
+                            </figure>
+                            <p>
+                                APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
+                            </p>
                             <p>
                                 <a class="btn btn-lg btn-primary" href="#">
-                                    Learn more
+                                    Get Documention
                                 </a>
                             </p>
                         </div>
@@ -91,10 +109,7 @@
                 </div>
                 {{-- carousel 3 --}}
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
+                    <img src="{{ asset('assets/images_api/3.jpg') }}" class="img-fluid h-100 w-100" alt="...">
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h1>One more for good measure.</h1>
@@ -118,112 +133,117 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
         <div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
+            <h1 class="text-center mb-4">Layanan API Yang Tersedia</h1>
+            <hr>
             <div class="row">
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>Some representative placeholder content for the three columns of text below the carousel. This is
-                        the first column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the
-                        second column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>And lastly this, the third column of representative placeholder content.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
 
+                <div class="col-lg-4 d-flex flex-column">
+                    <img src="{{ asset('assets/images_api/nation.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Nations API</h2>
+                    <p>
+                        APIConnectWithParis memungkinkan Anda menjelajahi data negara, termasuk populasi, ibu kota, dan status global.
+                    </p>
+                    <p class="mt-auto">
+                        <a class="btn btn-secondary" href="#">
+                            Get Documention
+                        </a>
+                    </p>
+                </div>
+            
+                <div class="col-lg-4 d-flex flex-column">
+                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Images API</h2>
+                    <p>
+                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
+                    </p>
+                    <p class="mt-auto">
+                        <a class="btn btn-secondary" href="#">
+                            Get Documention
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column">
+                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Images API</h2>
+                    <p>
+                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
+                    </p>
+                    <p class="mt-auto">
+                        <a class="btn btn-secondary" href="#">
+                            Get Documention
+                        </a>
+                    </p>
+                </div>
+
+            </div>
 
             <!-- START THE FEATURETTES -->
 
             <hr class="featurette-divider">
 
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span
-                            class="text-body-secondary">It’ll blow your mind.</span></h2>
-                    <p class="lead">Some great placeholder content for the first featurette here. Imagine some
-                        exciting prose here.</p>
+                {{-- APIConnectWithParis --}}
+                <div class="row featurette" id="about">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading fw-normal lh-1 mb-4">
+                            APIConnectWithParis
+                        </h2>
+                        <p class="lead">
+                            Sebuah adalah layanan API yang dirancang untuk memudahkan koneksi dan integrasi berbagai aplikasi dengan data dan layanan yang 
+                            Anda butuhkan. Tujuan kami adalah menyediakan API yang cepat, andal, dan mudah digunakan untuk para pengembang yang ingin 
+                            memperkaya aplikasi mereka dengan berbagai data dan fungsionalitas.
+                        </p>
+                    </div>
+                    <div class="col-md-5 p-0">
+                        <img src="{{ asset('assets/images_about/APIConnectWithParis.png') }}" alt="APIConnectWithParis.png" width="100%" height="500">
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                        width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img"
-                        aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
-                            fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+                <hr class="featurette-divider">
 
-            <hr class="featurette-divider">
-
-            <div class="row featurette">
-                <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span
-                            class="text-body-secondary">See for yourself.</span></h2>
-                    <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea
-                        of how this layout would work with some actual real-world content in place.</p>
+                {{-- Apa yang kami tawarkan --}}
+                <div class="row featurette">
+                    <div class="col-md-6 order-md-2">
+                        <h2 class="featurette-heading fw-normal lh-1 mb-4">
+                            Apa yang kami tawarkan
+                        </h2>
+                        <p class="lead">
+                            <span class="fw-bold">Integrasi Mudah:</span> Endpoint API kami dibuat sederhana dan mudah diakses sehingga Anda bisa memulai 
+                            integrasi dalam hitungan menit.
+                        </p>
+                        <p class="lead">
+                            <span class="fw-bold">Responsif dan Aman:</span> Kami berkomitmen untuk menjaga keamanan data dan memberikan waktu respons yang cepat.
+                        </p>
+                        
+                    </div>
+                    <div class="col-md-6 order-md-1 p-0">
+                        <img src="{{ asset('assets/images_about/marketing.jpg') }}" class="rounded" alt="marketing.jpg" width="100%" height="500">
+                    </div>
                 </div>
-                <div class="col-md-5 order-md-1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                        width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img"
-                        aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
-                            fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+                <hr class="featurette-divider">
 
-            <hr class="featurette-divider">
 
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
-                            class="text-body-secondary">Checkmate.</span></h2>
-                    <p class="lead">And yes, this is the last block of representative placeholder content. Again, not
-                        really intended to be actually read, simply here to give you a better view of what this would
-                        look like with some actual content. Your content.</p>
+                {{-- Mengapa Pilih APIConnectWithParis? --}}
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading fw-normal lh-1 mb-4">
+                            Mengapa Pilih APIConnectWithParis?
+                        </h2>
+                        <p class="lead">
+                            <span class="fw-bold">Dukungan Pengguna:</span> Kami menyediakan dokumentasi lengkap dan dukungan bagi pengembang 
+                            agar Anda bisa fokus membangun aplikasi.
+                        </p>
+                        <p class="lead">
+                            <span class="fw-bold">Update Berkelanjutan:</span>Kami terus memperbarui layanan dan memperkenalkan fitur-fitur baru untuk memenuhi kebutuhan teknologi 
+                            yang berkembang pesat.
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{{ asset('assets/images_about/confused.jpg') }}" class="rounded" alt="marketing.jpg" width="100%" height="500">
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                        width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img"
-                        aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
-                            fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
-
-            <hr class="featurette-divider">
+                <hr class="featurette-divider">
 
             <!-- /END THE FEATURETTES -->
 
@@ -242,5 +262,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </body>
-
 </html>

@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "APIConnectWithParis",
+        "description": "API documentation for APIConnectWithParis",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/countries": {
+            "get": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Get list of all countries",
+                "description": "Retrieve a list of all countries along with their statistics",
+                "operationId": "bbb90b9e86a9cab92aaa448fe98954c9",
+                "responses": {
+                    "200": {
+                        "description": "Countries data retrieved successfully"
+                    },
+                    "500": {
+                        "description": "Failed to retrieve data"
+                    }
+                }
+            }
+        },
+        "/api/countries/random": {
+            "get": {
+                "summary": "Get a random country",
+                "description": "Retrieve a random country along with its statistics",
+                "operationId": "082aa915cf4e70210623b835e1f923cc",
+                "responses": {
+                    "200": {
+                        "description": "Random country data retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/api/countries/{country_name}": {
+            "get": {
+                "summary": "Get a specific country",
+                "description": "Retrieve details of a specific country by its name",
+                "operationId": "f92c96d14ec227cf85461ec52a238fb9",
+                "parameters": [
+                    {
+                        "name": "country_name",
+                        "in": "path",
+                        "description": "Name of the country",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Country data retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Country not found"
+                    }
+                }
+            }
+        },
+        "/api/image/random": {
+            "get": {
+                "summary": "Get a random country",
+                "description": "Retrieve a random country along with its statistics",
+                "operationId": "c53902389523c996c2d1aeb3d225de94",
+                "responses": {
+                    "200": {
+                        "description": "Random country data retrieved successfully"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Berita",
+            "description": "Berita"
+        }
+    ]
+}
