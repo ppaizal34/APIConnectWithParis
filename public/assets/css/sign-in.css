@@ -1,0 +1,7 @@
+
+.form-signin {
+    max-width: 500px; /* Batas maksimal yang optimal */
+    width: 100%; /* Agar form responsive */
+    padding: 1rem; /* Jarak konten dari border */
+    margin: auto; /* Agar form berada di tengah */
+}
