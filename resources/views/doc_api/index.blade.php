@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation - Countries</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- CDN jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -123,7 +124,8 @@
                                         <label for="country_input">Search country:</label>
                                     </th>
                                     <td>
-                                        <input type="text" id="country_input" class="form-control w-100" placeholder="Search Country" value="Indonesia" required>
+                                        <input type="text" id="country_input" class="form-control w-100"
+                                            placeholder="Search Country" value="Indonesia" required>
                                     </td>
                                 </tr>
                             </tbody>
@@ -152,10 +154,12 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">URL</th>
-                                    <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
+                                    <td id="btn_copy" class="d-flex justify-content-between"
+                                        style="cursor: pointer">
                                         <span>http://127.0.0.1:8000/api/countries/random</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
-                                            id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
+                                            id="btn_copy" class="pt-1" alt="Copy" width="25"
+                                            height="25">
                                     </td>
                                 </tr>
                                 <tr>
@@ -189,7 +193,6 @@
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // $(document).on('click', '#wrapper_copy', function() {
@@ -215,6 +218,74 @@
         //     }
         // });
 
+        // $('#btn_random_api').click(function() {
+        //     const accordionItem = $(this).closest('.accordion-item');
+        //     const btn = $(this);
+        //     const info_status = accordionItem.find('#status');
+        //     const info_message = accordionItem.find('#message');
+        //     const loading = `<div class="spinner-border" role="status">
+    //                             <span class="visually-hidden">Loading...</span>
+    //                          </div>`;
+        //     btn.html(loading);
+
+        //     // Cek apakah tombol sudah diubah menjadi tombol "Clear"
+        //     if (btn.attr('id') === 'btn_clear') {
+        //         // Hapus elemen <h6> dan <pre>
+        //         btn.next('h6').remove();
+        //         btn.next('pre').remove();
+        //         info_status.html('-----');
+        //         info_message.html('-----');
+
+        //         // Kembalikan tombol ke state awal sebagai "Try out"
+        //         btn.attr('id', 'btn_random_api').text('Try out');
+        //     } else {
+        //         axios.get('http://127.0.0.1:8000/api/countries/random')
+        //             .then((response) => {
+        //                 const status = $(`<span class="badge text-bg-success">${response.status}</span>`);
+        //                 const message = $(
+        //                 `<span class="badge text-bg-success">${response.data.message}</span>`);
+        //                 const data = JSON.stringify(response.data, null, 2);
+        //                 const h6 = $('<h6></h6>').text('response');
+        //                 const pre = $('<pre></pre>').text(data);
+
+        //                 $(info_status).html(status);
+        //                 $(info_message).html(message);
+        //                 // Menambahkan elemen h6 dan pre setelah btn_try_out
+        //                 $('#btn_random_api').after(h6);
+        //                 h6.after(pre);
+        //                 // Ubah id dan teks tombol menjadi "Clear"
+        //                 btn.attr('id', 'btn_clear').text('Clear');
+        //             })
+        //             .catch((error) => {
+        //                 const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
+        //                 const message = $(
+        //                     `<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
+
+        //                 info_status.html(status);
+        //                 info_message.html(message);
+        //             });
+        //     }
+        // });
+
+        let id_btn = '';
+
+        function startRateLimit(btn) 
+        {
+            let oneMinute = 60;
+
+            const intervalRateLimit = setInterval(() => {
+                oneMinute--;
+                $(btn).prop('disabled', true).text(`Mohoh menunggu selama ${oneMinute} detik`);
+
+                if (oneMinute <= 0) {
+                    oneMinute = 60; 
+                    clearInterval(intervalRateLimit); 
+                    $(btn).prop('disabled', false).text('Try out');
+                }
+            }, 1000); 
+        }
+
+
         $(document).on('click', '#btn_copy', function() {
             const img_copy = $(this).find('img');
             const url = $(this).find('span');
@@ -231,163 +302,167 @@
             })
         })
 
-        $('#btn_random_api').click(function() {
+        $(document).on('click', '#btn_clear', function() {
             const accordionItem = $(this).closest('.accordion-item');
             const btn = $(this);
             const info_status = accordionItem.find('#status');
             const info_message = accordionItem.find('#message');
-            const loading = `<div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                             </div>`;
-            btn.html(loading);
 
-            // Cek apakah tombol sudah diubah menjadi tombol "Clear"
-            if (btn.attr('id') === 'btn_clear') {
-                // Hapus elemen <h6> dan <pre>
-                btn.next('h6').remove();
-                btn.next('pre').remove();
-                info_status.html('-----');
-                info_message.html('-----');
+            // Hapus elemen <h6> dan <pre>
+            btn.next('h6').remove();
+            btn.next('pre').remove();
+            info_status.html('-----');
+            info_message.html('-----');
 
-                // Kembalikan tombol ke state awal sebagai "Try out"
-                btn.attr('id', 'btn_random_api').text('Try out');
-            }else{
-                axios.get('http://127.0.0.1:8000/api/countries/random')
-                    .then((response) => {
-                        const status = $(`<span class="badge text-bg-success">${response.status}</span>`);
-                        const message = $(`<span class="badge text-bg-success">${response.data.message}</span>`);
-                        const data = JSON.stringify(response.data, null, 2);
-                        const h6 = $('<h6></h6>').text('response');
-                        const pre = $('<pre></pre>').text(data);
-    
-                        $(info_status).html(status);
-                        $(info_message).html(message);
-                        // Menambahkan elemen h6 dan pre setelah btn_try_out
-                        $('#btn_random_api').after(h6);
-                        h6.after(pre);
-                        // Ubah id dan teks tombol menjadi "Clear"
-                        btn.attr('id', 'btn_clear').text('Clear');
-                    })
-                    .catch((error) => {
-                        const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
-                        const message = $(`<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
-    
-                        info_status.html(status);
-                        info_message.html(message);
-                    });
-            }
+            // Kembalikan tombol ke state awal sebagai "Try out"
+            btn.attr('id', id_btn).text('Try out');
         });
 
-        $('#btn_all_api').click(function() {
+        $(document).on('click', '#btn_random_api', function() {
             const accordionItem = $(this).closest('.accordion-item');
             const btn = $(this);
             const info_status = accordionItem.find('#status');
             const info_message = accordionItem.find('#message');
-            const loading = `<div class="spinner-border" role="status">
+
+            // Menampilkan loading sebelum data dikirimkan
+            const loading = `<div class="spinner-border spinner-border-sm" role="status">
                                 <span class="visually-hidden">Loading...</span>
-                             </div>`;
-            btn.html(loading);
-            // Cek apakah tombol sudah diubah menjadi tombol "Clear"
-            if (btn.attr('id') === 'btn_clear') {
-                // Hapus elemen <h6> dan <pre>
-                btn.next('h6').remove();
-                btn.next('pre').remove();
-                info_status.html('-----');
-                info_message.html('-----');
+                            </div>`;
+            btn.prop('disabled', true).html(loading);
 
-                // Kembalikan tombol ke state awal sebagai "Try out"
-                btn.attr('id', 'btn_all_api').text('Try out');
-            } else {
-                // Jika tombol adalah "Try out", ambil data API
-                axios.get('http://127.0.0.1:8000/api/countries')
-                    .then((response) => {
-                        const status = $("<span class='badge text-bg-success'>200</span>");
-                        const message = $(
-                        `<span class='badge text-bg-success'>${response.data.message}</span>`);
-                        const country = response.data.data;
-                        const h6 = $('<h6></h6>').text('Response:');
-                        const pre = $('<pre></pre>').css({
-                            'height': '200px',
-                            'overflow-x': 'hidden'
-                        });
-                        $(info_status).html(status);
-                        $(info_message).html(message);
-                        // Tambahkan elemen <h6> dan <pre> setelah tombol
-                        btn.after(h6);
+            axios.get('http://127.0.0.1:8000/api/countries/random')
+                .then((response) => {
+                    const status = $(`<span class="badge text-bg-success">${response.status}</span>`);
+                    const message = $(`<span class="badge text-bg-success">${response.data.message}</span>`);
+                    const data = JSON.stringify(response.data, null, 2);
+                    const h6 = $('<h6></h6>').text('response');
+                    const pre = $('<pre></pre>').text(data);
 
-                        // Tambahkan data API ke dalam <pre>
-                        country.forEach((data) => {
-                            pre.append(JSON.stringify(data, null, 2) + '\n');
-                        });
+                    $(info_status).html(status);
+                    $(info_message).html(message);
+                    // Menambahkan elemen h6 dan pre setelah btn_try_out
+                    $(btn).after(h6);
+                    h6.after(pre);
+                    // Ubah id dan teks tombol menjadi "Clear"
+                    btn.attr('id', 'btn_clear').prop('disabled', false).text('Clear');
+                    id_btn = 'btn_random_api';
+                })
+                .catch((error) => {
 
-                        // Tambahkan <pre> setelah <h6>
-                        h6.after(pre);
+                    if (error.response.status == 429) {
+                        startRateLimit(btn)
+                    }
 
-                        // Ubah id dan teks tombol menjadi "Clear"
-                        btn.attr('id', 'btn_clear').text('Clear');
-                    })
-                    .catch((error) => {
-                        const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
-                        const message = $(
-                            `<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
+                    const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
+                    const message = $(`<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
 
-                        info_status.html(status);
-                        info_message.html(message);
-                    });
-            }
+                    info_status.html(status);
+                    info_message.html(message);
+                });
         });
 
-        $('#btn_spesifik_api').click(function() {
+        $(document).on('click', '#btn_all_api', function() {
+            const accordionItem = $(this).closest('.accordion-item');
+            const btn = $(this);
+            const info_status = accordionItem.find('#status');
+            const info_message = accordionItem.find('#message');
+
+            // Menampilkan loading sebelum data dikirimkan
+            const loading = `<div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>`;
+            btn.prop('disabled', true).html(loading);
+
+            axios.get('http://127.0.0.1:8000/api/countries')
+                .then((response) => {
+                    const status = $("<span class='badge text-bg-success'>200</span>");
+                    const message = $(`<span class='badge text-bg-success'>${response.data.message}</span>`);
+                    const country = response.data.data;
+                    const h6 = $('<h6></h6>').text('Response:');
+                    const pre = $('<pre></pre>').css({
+                        'height': '200px',
+                        'overflow-x': 'hidden'
+                    });
+                    $(info_status).html(status);
+                    $(info_message).html(message);
+                    // Tambahkan elemen <h6> dan <pre> setelah tombol
+                    btn.after(h6);
+
+                    // Tambahkan data API ke dalam <pre>
+                    country.forEach((data) => {
+                        pre.append(JSON.stringify(data, null, 2) + '\n');
+                    });
+
+                    // Tambahkan <pre> setelah <h6>
+                    h6.after(pre);
+
+                    // Ubah id dan teks tombol menjadi "Clear"
+                    btn.attr('id', 'btn_clear').prop('disabled', false).text('Clear');
+                    id_btn = 'btn_all_api';
+                })
+                .catch((error) => {
+
+                    if (error.response.status == 429) {
+                        startRateLimit(btn)
+                    }
+
+                    const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
+                    const message = $(`<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
+
+                    info_status.html(status);
+                    info_message.html(message);
+                });
+        });
+
+        $(document).on('click', '#btn_spesifik_api', function() {
             const accordionItem = $(this).closest('.accordion-item');
             const btn = $(this);
             const info_status = accordionItem.find('#status');
             const info_message = accordionItem.find('#message');
             const country_input = $('#country_input').val();
-            const loading = `<div class="spinner-border" role="status">
+
+            // Menampilkan loading sebelum data dikirimkan
+            const loading = `<div class="spinner-border spinner-border-sm" role="status">
                                 <span class="visually-hidden">Loading...</span>
-                             </div>`;
-            btn.html(loading);
+                            </div>`;
+            btn.prop('disabled', true).html(loading);
 
-            // Cek apakah tombol sudah diubah menjadi tombol "Clear"
-            if (btn.attr('id') === 'btn_clear') {
-                // Hapus elemen <h6> dan <pre>
-                btn.next('h6').remove();
-                btn.next('pre').remove();
-                info_status.html('-----');
-                info_message.html('-----');
+            axios.get(`http://127.0.0.1:8000/api/countries/${country_input}`)
+                .then((response) => {
+                    const countries = response.data.data;
+                    const status = $(`<span class='badge text-bg-success'>${response.status}</span>`);
+                    const message = $(
+                        `<span class='badge text-bg-success'>${response.data.message}</span>`);
+                    const h6 = $('<h6></h6>').text('response:');
+                    const pre = $('<pre></pre>');
 
-                // Kembalikan tombol ke state awal sebagai "Try out"
-                btn.attr('id', 'btn_spesifik_api').text('Try out');
-            }else{
-                axios.get(`http://127.0.0.1:8000/api/countries/${country_input}`)
-                    .then((response) => {
-                        const countries = response.data.data;
-                        const status = $(`<span class='badge text-bg-success'>${response.status}</span>`);
-                        const message = $(`<span class='badge text-bg-success'>${response.data.message}</span>`);
-                        const h6 = $('<h6></h6>').text('response:');
-                        const pre = $('<pre></pre>');
-    
-                        $(info_status).html(status);
-                        $(info_message).html(message);
-    
-                        $(btn).after(h6);
-    
-                        countries.forEach((country) => {
-                            pre.append(JSON.stringify(country, null, 2));
-                        });
-    
-                        h6.after(pre);
-                        // Ubah id dan teks tombol menjadi "Clear"
-                        btn.attr('id', 'btn_clear').text('Clear');
-                    })
-                    .catch((error) => {
-                        const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
-                        const message = $(`<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
-    
-                        $(info_status).html(status);
-                        $(info_message).html(message);
+                    $(info_status).html(status);
+                    $(info_message).html(message);
+
+                    $(btn).after(h6);
+
+                    countries.forEach((country) => {
+                        pre.append(JSON.stringify(country, null, 2));
                     });
-            }
+
+                    h6.after(pre);
+                    // Ubah id dan teks tombol menjadi "Clear"
+                    btn.attr('id', 'btn_clear').prop('disabled', false).text('Clear');
+                    id_btn = 'btn_spesifik_api';
+                })
+                .catch((error) => {
+
+                    if (error.response.status == 429) {
+                        startRateLimit(btn)
+                    }
+
+                    const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
+                    const message = $(
+                        `<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
+
+                    $(info_status).html(status);
+                    $(info_message).html(message);
+                });
         });
 
         $('#country_input').on('input', function() {

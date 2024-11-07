@@ -15,7 +15,9 @@
     <main class="container-fluid vh-100 d-flex align-items-center">
         <div class="container">
            
-            <form class="form-signin" method="POST">
+            <form class="form-signin" action="{{ route($route) }}" method="POST">
+                @method('POST')
+                @csrf
                 <h1 class="text-center text-primary fw-bold">APIConnectWithParis</h1>
                 <h3 class="text-center mb-3">
                     @if (request()->is('login'))
@@ -27,20 +29,55 @@
                 @if (request()->is('register'))    
                 {{-- Name --}}
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                    id="name" name="name" placeholder="Name" value="{{ old('name') }}">
                     <label for="name">Name</label>
+                    @error('name')
+                    <div class="invalid-feedback">
+                        <span>{{ $message }}</span>
+                    </div>
+                    @enderror
                 </div>
                 @endif
                 {{-- Email --}}
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                    id="email" name="email" placeholder="Email address" value="{{ old('email') }}">
                     <label for="email">Email address</label>
+                    @error('email')
+                    <div class="invalid-feedback">
+                        <span>{{ $message }}</span>
+                    </div>
+                    @enderror
                 </div>
                 {{-- Password --}}
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                    id="password" name="password" placeholder="Password" value="{{ old('password') }}">
                     <label for="password">Password</label>
+                    @error('password')
+                    <div class="invalid-feedback">
+                        <span>{{ $message }}</span>
+                    </div>
+                    @enderror
                 </div>
+
+                {{-- Jika login error --}}
+                @if ($errors->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    <h6>Warning!</h6>
+                   {{ $errors->first('error') }}
+                </div>
+                @endif
+
+                {{-- Jika login success --}}
+                @if (session('success'))
+                <div class="alert alert-info" role="alert">
+                    <h6>Info!</h6>
+                   {{ session('success') }}
+                </div>
+                @endif
+               
                 @if (request()->is('login'))    
                 {{-- Btn Login --}}
                 <button type="submit" class="btn btn-primary w-100 fs-5 mb-3">

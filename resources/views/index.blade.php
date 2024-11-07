@@ -22,7 +22,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0 flex justify-content-center align-items-center">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
                                 Home
@@ -38,11 +38,20 @@
                                 Contact
                             </a>
                         </li>
+                        @guest    
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/login') }}">
                                 Login
                             </a>
                         </li>
+                        @endguest
+                        @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/my-profile') }}">
+                                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle">
+                            </a>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
             </div>

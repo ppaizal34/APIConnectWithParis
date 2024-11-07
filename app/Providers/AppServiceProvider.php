@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('country', function (){
-            return Limit::perMinute(2)->response(function() {
+            return Limit::perMinute(5)->response(function() {
                 return response()->json([
                     'message' => 'To many request'
                 ], 429);
