@@ -86,7 +86,7 @@
                                di seluruh dunia,mulai dari populasi,ibu kota,hingga status kedaulatan dan keanggotaan global.
                             </p>
                             <p>
-                                <a class="btn btn-lg btn-primary" href="#">
+                                <a class="btn btn-lg btn-primary" href="{{ route('doc_nations') }}">
                                     Get Documention
                                 </a>
                             </p>
@@ -155,7 +155,7 @@
                         APIConnectWithParis memungkinkan Anda menjelajahi data negara, termasuk populasi, ibu kota, dan status global.
                     </p>
                     <p class="mt-auto">
-                        <a class="btn btn-secondary" href="#">
+                        <a class="btn btn-secondary" href="{{ route('doc_nations') }}">
                             Get Documention
                         </a>
                     </p>

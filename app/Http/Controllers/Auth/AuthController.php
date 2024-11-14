@@ -27,7 +27,6 @@ class AuthController extends Controller
         ];
 
         return view('auth.index', $data);
-
     }
 
     public function authenticate(Request $request)
@@ -67,8 +66,9 @@ class AuthController extends Controller
             ]);
 
             // Simpan data ke database
-            User::create($validatedData);
-
+            $user = User::create($validatedData);
+            Auth::login($user);
+            
             // Berhasil menyimpan, redirect ke halaman sukses atau tampilkan pesan sukses
             return redirect('/');
         } catch (ValidationException $e) {

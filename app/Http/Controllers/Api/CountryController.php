@@ -33,7 +33,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::with('statistic')->get();
+        $countries = Country::all();
 
         try{
             return response()->json([
@@ -63,7 +63,7 @@ class CountryController extends Controller
      */
     public function random()
     {
-        $country = Country::with('statistic')->inRandomOrder()->first();
+        $country = Country::inRandomOrder()->first();
 
         return response()->json([
             'status' => 'success',
@@ -101,9 +101,7 @@ class CountryController extends Controller
      */
     public function show(string $value)
     {
-        $country = Country::with('statistic')
-        ->where('country_name', 'like', $value . '%')
-        ->get();
+        $country = Country::where('country_name', 'like', $value . '%') ->get();
 
         if($country->isEmpty()){
             return response()->json([
