@@ -14,15 +14,7 @@ Route::get('/', function () {
 //     return view('doc_api.index');
 // });
 
-// Route AuthController
-Route::controller(AuthController::class)
-->group(function () {
-    Route::get('login', 'show_login');
-    Route::post('login', 'authenticate')->name('authenticate');
-    Route::get('register', 'show_register');
-    Route::post('register', 'register')->name('register');
-    Route::post('logout', 'logout')->name('logout');
-});
+
 
 // Route documents API
 Route::controller(DocController::class)
@@ -30,6 +22,15 @@ Route::controller(DocController::class)
     Route::get('docs/nations', 'docs_nations')->name('doc_nations');
 });
 
+// Route AuthController
+Route::controller(AuthController::class)
+->group(function () {
+    Route::get('login', 'show_login');
+    Route::post('login', 'authenticate')->name('authenticate');
+    Route::get('register', 'show_register');
+    Route::post('register', 'register')->name('register');
+    Route::post('logout', 'logout')->name('logout')->middleware('auth:sanctum');
+});
 
 // Route User
 Route::controller(UserController::class)

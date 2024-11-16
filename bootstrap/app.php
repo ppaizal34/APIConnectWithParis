@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use App\Http\Middleware\AuthOrGuestThrottle;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Laravel\Sanctum\Http\Middleware\CheckAbilities;
+use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -24,7 +26,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'auth.or.throttle' => AuthOrGuestThrottle::class
+            'auth.or.throttle' => AuthOrGuestThrottle::class,
+            'abilities' => CheckAbilities::class,
+            'ability' => CheckForAnyAbility::class,
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            'stripe/*',
+            'http://127.0.0.1:8000/login',
+            'http://127.0.0.1:8000/logout',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

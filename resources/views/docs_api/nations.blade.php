@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation - Countries</title>
+    {{-- CDN axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- CDN jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -194,7 +195,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -294,11 +294,12 @@
             const img_copy = $(this).find('img');
             const url = $(this).find('span');
 
-
             navigator.clipboard.writeText(url.text()).then(() => {
                 img_copy.replaceWith("<span id='copied'>Copied!</span>");
+                $(this).prop('disabled', true);
 
                 setTimeout(() => {
+                    $(this).prop('disabled', false);
                     const btn_copied = $(this).find('#copied');
                     btn_copied.replaceWith(`<img src="{{ asset('assets/images_api/documents_api/copy.png') }}" id="btn_copy"
                                             class="pt-1" alt="Copy" width="25" height="25">`);
@@ -377,7 +378,7 @@
                             </div>`;
             btn.prop('disabled', true).html(loading);
 
-            axios.get('http://127.0.0.1:8000/api/countries')
+            axios.get('http://127.0.0.1:8000/api/public/countries')
                 .then((response) => {
                     const status = $("<span class='badge text-bg-success'>200</span>");
                     const message = $(`<span class='badge text-bg-success'>${response.data.message}</span>`);
@@ -431,7 +432,7 @@
                             </div>`;
             btn.prop('disabled', true).html(loading);
 
-            axios.get(`http://127.0.0.1:8000/api/countries/${country_input}`)
+            axios.get(`http://127.0.0.1:8000/api/public/countries/${country_input}`)
                 .then((response) => {
                     const countries = response.data.data;
                     const status = $(`<span class='badge text-bg-success'>${response.status}</span>`);
