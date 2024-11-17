@@ -34,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'stripe/*',
             'http://127.0.0.1:8000/login',
             'http://127.0.0.1:8000/logout',
+            'http://127.0.0.1:8000/register',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

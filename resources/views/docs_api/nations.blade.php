@@ -199,78 +199,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // $(document).on('click', '#wrapper_copy', function() {
-        //     // const parentClass = $(this).parent().parent().attr('class');
-        //     const parentClass = $(this).closest('div').attr('class');
-        //     if (parentClass === parentClass) {
-        //         const url_text = $(`.${parentClass} strong`).children('span:first-child').text();
-        //         const btn_copy = $(`.${parentClass} strong`).find('#btn_copy')[0];
-
-        //         navigator.clipboard.writeText(url_text).then(() => {
-        //             $(btn_copy).replaceWith(`<span id='btn_copy'>Copied!</span>`);
-        //             const span = $(`.${parentClass} strong`).find('#btn_copy')[0];
-
-        //             setTimeout(() => {
-        //                 $(span).replaceWith(
-        //                     `<img src="{{ asset('assets/images_api/documents_api/copy.png') }}" id="btn_copy" class="pt-1" alt="Copy" width="30" height="30">`
-        //                 );
-        //             }, 3000);
-
-        //         }).catch((err) => {
-        //             $('#wrapper_copy').html(err);
-        //         });
-        //     }
-        // });
-
-        // $('#btn_random_api').click(function() {
-        //     const accordionItem = $(this).closest('.accordion-item');
-        //     const btn = $(this);
-        //     const info_status = accordionItem.find('#status');
-        //     const info_message = accordionItem.find('#message');
-        //     const loading = `<div class="spinner-border" role="status">
-    //                             <span class="visually-hidden">Loading...</span>
-    //                          </div>`;
-        //     btn.html(loading);
-
-        //     // Cek apakah tombol sudah diubah menjadi tombol "Clear"
-        //     if (btn.attr('id') === 'btn_clear') {
-        //         // Hapus elemen <h6> dan <pre>
-        //         btn.next('h6').remove();
-        //         btn.next('pre').remove();
-        //         info_status.html('-----');
-        //         info_message.html('-----');
-
-        //         // Kembalikan tombol ke state awal sebagai "Try out"
-        //         btn.attr('id', 'btn_random_api').text('Try out');
-        //     } else {
-        //         axios.get('http://127.0.0.1:8000/api/countries/random')
-        //             .then((response) => {
-        //                 const status = $(`<span class="badge text-bg-success">${response.status}</span>`);
-        //                 const message = $(
-        //                 `<span class="badge text-bg-success">${response.data.message}</span>`);
-        //                 const data = JSON.stringify(response.data, null, 2);
-        //                 const h6 = $('<h6></h6>').text('response');
-        //                 const pre = $('<pre></pre>').text(data);
-
-        //                 $(info_status).html(status);
-        //                 $(info_message).html(message);
-        //                 // Menambahkan elemen h6 dan pre setelah btn_try_out
-        //                 $('#btn_random_api').after(h6);
-        //                 h6.after(pre);
-        //                 // Ubah id dan teks tombol menjadi "Clear"
-        //                 btn.attr('id', 'btn_clear').text('Clear');
-        //             })
-        //             .catch((error) => {
-        //                 const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
-        //                 const message = $(
-        //                     `<span class='badge text-bg-danger'>${error.response.statusText}</span>`);
-
-        //                 info_status.html(status);
-        //                 info_message.html(message);
-        //             });
-        //     }
-        // });
-
         let id_btn = '';
 
         function startRateLimit(btn) 
@@ -288,7 +216,6 @@
                 }
             }, 1000); 
         }
-
 
         $(document).on('click', '#btn_copy', function() {
             const img_copy = $(this).find('img');

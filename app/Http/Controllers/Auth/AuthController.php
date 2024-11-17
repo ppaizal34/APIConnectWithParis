@@ -32,10 +32,10 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email:dns'],
-            'password' => ['required'],
-        ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
 
         if(Auth::attempt($credentials)){
             $user = $request->user();
@@ -65,9 +65,13 @@ class AuthController extends Controller
             // return redirect()->intended('/')->with('success', 'Proses login berhasil');
         }
 
-        return back()->withErrors([
-            'error' => 'Proses login gagal. username atau password salah '
-        ]);
+        return response()->json([
+            'status' => false,
+            'message' => 'Proses login gagal. username atau password salah'
+        ], 401);
+        // return back()->withErrors([
+        //     'error' => 'Proses login gagal. username atau password salah '
+        // ]);
     }
 
     public function logout(Request $request)
@@ -93,26 +97,36 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-            // Validasi data
-            $validatedData = $request->validate([
-                'name' => ['required', 'string', 'min:3', 'max:255'],
-                'email' => ['required', 'email:dns', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'max:255'],
-            ]);
-
+            $insert = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
+          
             // Simpan data ke database
-            $user = User::create($validatedData);
+            $user = User::create($insert);
             Auth::login($user);
+
+            $role_token = $user->createToken('user_token', ['read_only'])->plainTextToken;
+            $access_token = $user->createToken('access_token', ['access_token'], Carbon::now()->addHour())->plainTextToken;
+            $refresh_token = $user->createToken('refresh_token', ['issue-access-token'])->plainTextToken;
             
-            // Berhasil menyimpan, redirect ke halaman sukses atau tampilkan pesan sukses
-            return redirect('/');
-        } catch (ValidationException $e) {
-            // Jika validasi gagal, tangani error dan redirect kembali dengan pesan error
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return response()->json([
+                'success' => true,
+                'message' => 'Register Berhasil!',
+                'data' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'role_token' => $role_token,
+                    'token' => $access_token,
+                    'refresh_token' => $refresh_token
+                ]
+            ], 200);
         } catch (Exception $e) {
-            // Jika ada error server, tangani error tersebut
-            // Misalnya error saat mengakses database atau error tak terduga lainnya
-            return redirect()->back()->with('error', 'Terjadi kesalahan pada server. Silakan coba lagi.')->withInput();
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan pada server'
+            ], 500);
         }
     }
 }
