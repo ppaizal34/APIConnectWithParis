@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\TrackRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AuthOrGuestThrottle;
@@ -15,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['api', 'throttle:auth', 'auth:sanctum'])
+            Route::middleware(['api', 'throttle:auth', 'auth:sanctum', 'track.requests'])
                 ->prefix('api/private')
                 ->group(base_path('routes/private_api.php'));
 
@@ -27,6 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth.or.throttle' => AuthOrGuestThrottle::class,
+            'track.requests' => TrackRequest::class,
             'abilities' => CheckAbilities::class,
             'ability' => CheckForAnyAbility::class,
         ]);
