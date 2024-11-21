@@ -169,7 +169,7 @@
                     const access_token = response.data.data.token;
                     localStorage.setItem('access_token', access_token);
 
-                    window.location.href = 'http://127.0.0.1:8000/';
+                    window.location.href = 'http://127.0.0.1:8000/admin';
                 })
                 .catch(function(error) {
                     const error_login = $('#error_login');
