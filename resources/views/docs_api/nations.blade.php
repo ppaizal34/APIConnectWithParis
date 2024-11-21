@@ -307,6 +307,7 @@
 
             axios.get('http://127.0.0.1:8000/api/public/countries')
                 .then((response) => {
+                    // console.log(response.data.data[0].continent)
                     const status = $("<span class='badge text-bg-success'>200</span>");
                     const message = $(`<span class='badge text-bg-success'>${response.data.message}</span>`);
                     const country = response.data.data;
