@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Group;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -155,15 +156,21 @@ class CountryResource extends Resource
                         ->color('primary')
                         ->icon('heroicon-o-pencil')
                         ->url(fn (Country $record) => url("/admin/countries/{$record->id}/edit")),
-                    Action::make('delete')
+                        Action::make('delete')
                         ->label('Delete')
                         ->color('danger')
                         ->icon('heroicon-o-trash')
-                        ->action(fn (Country $record) => $record->delete())
+                        ->action(function (Country $record) {
+                            $record->delete();
+                            Notification::make()
+                                ->title('Country deleted successfully.')
+                                ->success()
+                                ->send();
+                    
+                            return redirect('/admin/countries'); // Tambahkan redirect manual
+                        })
                         ->requiresConfirmation()
                         ->modalHeading('Delete Country')
-                        ->modalSubheading('Are you sure you want to delete this country? This action cannot be undone.')
-                        ->modalButton('Delete')
                 ])
                 ->description('Prevent abuse by limiting the number of requests per period')
                 ->schema([

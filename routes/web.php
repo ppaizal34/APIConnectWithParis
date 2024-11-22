@@ -10,11 +10,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/doc', function (){
-//     return view('doc_api.index');
-// });
-
-
+Route::get('/admin/login', function() {
+    return abort(401);
+});
 
 // Route documents API
 Route::controller(DocController::class)
