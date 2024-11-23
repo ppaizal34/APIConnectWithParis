@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Doc\DocController;
-use App\Http\Controllers\GetApi\GetApiController;
-use App\Http\Controllers\User\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Doc\DocController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\GetApi\GetApiController;
 
 Route::get('/', function () {
     return view('index');
@@ -13,6 +15,23 @@ Route::get('/', function () {
 Route::get('/admin/login', function() {
     return abort(401);
 });
+
+// Route cache
+// Route::get('/cache', function(){
+//     $value = Cache::remember('users', 4, function () {
+//         return User::all();
+//     });
+
+//     return $value;
+// });
+
+// Route::get('/cache2', function(){
+//     $value = Cache::remember('users', 4, function () {
+//         return User::Count();
+//     });
+
+//     return $value;
+// });
 
 // Route documents API
 Route::controller(DocController::class)
@@ -36,10 +55,5 @@ Route::controller(UserController::class)
     Route::get('my-profile', 'my_profile')->name('my-profile');
 });
 
-// Route::prefix('/')
-// ->controller(GetApiController::class)
-// ->group(function (){
-//     Route::get('nation', 'doc_nation')->name('doc_nation');
-// });
 
 
