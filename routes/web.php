@@ -17,6 +17,36 @@ Route::get('/admin/login', function() {
 });
 
 // Route cache
+// Route::get('/putCache', function(){
+//     $second = 60; 
+//     $user = User::all(); // Konversi ke array
+//     Cache::put('user', $user, $second);
+// });
+
+// Route::get('/getCache', function () {
+//     $users = Cache::get('user');
+//     return view('cache.index', ['users' => $users]);
+// });
+
+Route::get('/getUser', function() {
+    $second = '120';
+    $user = Cache::remember('users', $second, function(){
+        return User::all();
+    });
+
+    return view('cache.index', [
+        'users' => $user
+    ]);
+
+});
+
+Route::get('/noCache', function(){
+    $user = User::all();
+    return view('cache.index', [
+        'users' => $user 
+    ]);
+});
+
 // Route::get('/cache', function(){
 //     $value = Cache::remember('users', 4, function () {
 //         return User::all();
