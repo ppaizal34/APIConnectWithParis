@@ -6,6 +6,7 @@ use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\StatsChart;
 use App\Filament\Widgets\LatestUsers;
 use App\Filament\Widgets\GeographicalUser;
+use App\Filament\Widgets\NewUsers;
 
 use Filament\Pages\Page;
 
@@ -22,6 +23,7 @@ class Stats extends Page
             StatsChart::class,
             GeographicalUser::class,
             LatestUsers::class,
+            NewUsers::class,
         ];
     }
 }
