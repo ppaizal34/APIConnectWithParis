@@ -9,10 +9,12 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Section;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -49,7 +51,7 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('email')->sortable()->searchable(),
-                TextColumn::make('is_admin')->sortable()->searchable(),
+                IconColumn::make('is_admin')->boolean(),
                 TextColumn::make('created_at')->sortable()->searchable(),
                 TextColumn::make('request_count')->sortable()->searchable(),
             ])

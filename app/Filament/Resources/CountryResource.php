@@ -10,12 +10,12 @@ use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Group;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\CountryResource\Pages;
 use Filament\Infolists\Components\Actions\Action;
@@ -27,67 +27,72 @@ class CountryResource extends Resource
     protected static ?string $model = Country::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Data API';
+    protected static ?string $navigationGroup = 'Data API Management';
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                TextInput::make('country_name')
-                    ->required(),
-
-                Select::make('sovereign_state')
-                    ->options([
-                        'Yes' => 'Yes',
-                        'No' => 'No',
-                    ]),
-            
-                TextInput::make('country_codes')
-                    ->required(),
-
-                TextInput::make('official_name')
-                    ->required(),
-            
-                TextInput::make('capital_city')
-                    ->required(),
-            
-                Select::make('continent')
-                    ->options([
-                        'Asia' => 'Asia',
-                        'Europe' => 'Europe',
-                        'Africa' => 'Africa',
-                        'Oceania' => 'Oceania',
-                        'North America' => 'North America',
-                        'South America' => 'South America',
-                    ]),
-            
-                TextInput::make('member_of')
-                    ->required(),
-            
-                TextInput::make('population')
-                    ->required(),
-            
-                TextInput::make('total_area')
-                    ->required(),
-            
-                TextInput::make('highest_point')
-                    ->required(),
-            
-                TextInput::make('lowest_point')
-                    ->required(),
-            
-                TextInput::make('gdp_percapita')
-                    ->required(),
-            
-                TextInput::make('currency')
-                    ->required(),
-            
-                TextInput::make('calling_code')
-                    ->required(),
-            
-                TextInput::make('internet_tld')
-                    ->required(),
-            ]);
+        ->schema([
+            Section::make('Country')
+                ->description('Put the country details in')
+                ->schema([
+                    TextInput::make('country_name')
+                        ->required(),
+        
+                    Select::make('sovereign_state')
+                        ->options([
+                            'Yes' => 'Yes',
+                            'No' => 'No',
+                        ]), // Tambahkan koma di sini
+        
+                    TextInput::make('country_codes')
+                        ->required(),
+        
+                    TextInput::make('official_name')
+                        ->required(),
+        
+                    TextInput::make('capital_city')
+                        ->required(),
+        
+                    Select::make('continent')
+                        ->options([
+                            'Asia' => 'Asia',
+                            'Europe' => 'Europe',
+                            'Africa' => 'Africa',
+                            'Oceania' => 'Oceania',
+                            'North America' => 'North America',
+                            'South America' => 'South America',
+                        ]), // Tambahkan koma di sini
+        
+                    TextInput::make('member_of')
+                        ->required(),
+        
+                    TextInput::make('population')
+                        ->required(),
+        
+                    TextInput::make('total_area')
+                        ->required(),
+        
+                    TextInput::make('highest_point')
+                        ->required(),
+        
+                    TextInput::make('lowest_point')
+                        ->required(),
+        
+                    TextInput::make('gdp_percapita')
+                        ->required(),
+        
+                    TextInput::make('currency')
+                        ->required(),
+        
+                    TextInput::make('calling_code')
+                        ->required(),
+        
+                    TextInput::make('internet_tld')
+                        ->required(),
+                ])->columns('2'),
+        ]);
+        
     }
 
     public static function table(Table $table): Table
