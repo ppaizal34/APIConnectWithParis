@@ -6,9 +6,9 @@ use Filament\Widgets\ChartWidget;
 
 class StatsChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart User Register';
+    protected static ?string $heading = 'User Register';
     protected static string $color = 'success';
-
+   
     protected function getData(): array
     {
         return [

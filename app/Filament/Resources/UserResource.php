@@ -9,11 +9,11 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists\Components\Section;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\UserResource\Pages;
@@ -30,18 +30,22 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required()
-                    ->minLength(3)
-                    ->maxLength(255),
-                TextInput::make('email')->required()
-                    ->email()
-                    ->unique(ignorable: fn($record) => $record),
-                TextInput::make('password')->required()
-                    ->password(fn($record) => $record === null)
-                    ->revealable()
-                    ->minLength(8)
-                    ->maxLength(255)
-                    ->hidden(fn($record) => $record !== null)
+                Section::make('User')
+                    ->description('Create user on here')
+                    ->schema([
+                        TextInput::make('name')->required()
+                            ->minLength(3)
+                            ->maxLength(255),
+                        TextInput::make('email')->required()
+                            ->email()
+                            ->unique(ignorable: fn($record) => $record),
+                        TextInput::make('password')->required()
+                            ->password(fn($record) => $record === null)
+                            ->revealable()
+                            ->minLength(8)
+                            ->maxLength(255)
+                            ->hidden(fn($record) => $record !== null)
+                    ]),
             ]);
     }
 

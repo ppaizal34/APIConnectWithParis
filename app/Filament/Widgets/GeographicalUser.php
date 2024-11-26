@@ -6,8 +6,8 @@ use Filament\Widgets\ChartWidget;
 
 class GeographicalUser extends ChartWidget
 {
-    protected static ?string $heading = 'GeographicalUser';
-
+    protected static ?string $heading = 'Geographical User';
+ 
     protected function getData(): array
     {
         return [
