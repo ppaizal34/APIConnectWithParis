@@ -163,31 +163,32 @@
             event.preventDefault();
             const formData = new FormData(form);
 
+            const loading = `<div class="spinner-border text-light" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>`;
+            const btn_login = $('#btn_login').html(loading).attr('type', 'button');
+            const success_login = $('#success_login');
+
+            success_login.children().last().append('').text('');
+            success_login.children().last().append('').text(`Proses Login Berhasil`);
+
             axios.post('http://127.0.0.1:8000/login', formData)
                 .then(function(response) {
                     // console.log(response.data.message);
+                    success_login.show();
                     const error_login = $('#error_login');
+
                     if(error_login.is(":visible")){
                         error_login.hide();
                     }
-                    const loading = `<div class="spinner-border text-dark" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>`;
-                    const btn_login = $('#btn_login').html(loading).attr('type', 'button');
-                    const success_login = $('#success_login');
-                    const message = response.data.message;
-                    const code_status = response.status;
-
-                    success_login.children().last().append('').text('');
-                    success_login.children().last().append('').text(`${message}`);
-                    success_login.show();
-
+                    
                     const access_token = response.data.data.token;
                     localStorage.setItem('access_token', access_token);
-
+                    btn_login.hide();
                     window.location.href = 'http://127.0.0.1:8000/';
                 })
                 .catch(function(error) {
+                    btn_login.html('login').attr('type', 'submit');
                     const error_login = $('#error_login');
                     const message = error.response.data.message;
                     const code_status = error.status;

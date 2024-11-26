@@ -80,18 +80,27 @@ class AuthController extends Controller
             Auth::guard('web')->logout();
         }
     
-        // Hapus semua token pengguna
-        $request->user()->tokens()->delete();
+        try {
+            // Hapus semua token pengguna (untuk API)
+            $request->user()->tokens()->delete();
     
-        // Invalidate session jika menggunakan session-based
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            // Invalidate sesi jika menggunakan session-based
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
     
-        return response()->json([
-            'status' => true,
-            'message' => 'Logout berhasil'
-        ], 200);
-        // return redirect('/');
+            // Berikan respons berhasil
+            return response()->json([
+                'status' => true,
+                'message' => 'Logout berhasil',
+            ], 200);
+        } catch (\Exception $e) {
+            // Tangani error jika ada
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan saat logout',
+                'error' => $e->getMessage(),
+            ], 500); // Internal Server Error
+        }
     }
 
     public function register(Request $request)

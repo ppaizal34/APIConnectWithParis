@@ -72,15 +72,29 @@
                                 Reset API Token
                             </button>
                         </div>
+
+                        {{-- Jika logout success --}}
+                        <div class="alert alert-info" id="success_logout" role="alert" style="display: none">
+                            <h6>Info!</h6>
+                            <h6></h6>
+                        </div>
+
+                        {{-- Jika login error --}}
+                        <div id="error_logout" class="alert alert-danger" role="alert" style="display: none">
+                            <h6>Warning!</h6>
+                            <h6></h6>
+                        </div>
+
                         <!-- Tombol Logout -->
                         <div class="d-grid">
                             <form id="form_logout" method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" id="btn_logout" class="btn btn-danger">
                                     Logout
                                 </button>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -101,7 +115,7 @@
                 .then(() => {
                     token.replaceWith("<span id='copied'>Copied!</span>");
                     $(this).prop('disabled', true);
-                    
+
                     setTimeout(() => {
                         $(this).prop('disabled', false);
                         const btn_copied = $(this).find('#copied');
@@ -119,20 +133,42 @@
 
                 const formData = new FormData(this);
 
-                axios.post('http://127.0.0.1:8000/logout', formData)
-                .then((response) => {
-                    const code_status = response.status;
+                const loading = `<div class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>`;
+                const btn_logout = $('#btn_logout').html(loading).attr('type', 'button');
+                const success_logout = $('#success_logout');
 
-                    if(code_status == 200){
-                        localStorage.removeItem('access_token');
-                        window.location.href = 'http://127.0.0.1:8000/';
-                    }
-                })
-                .catch((error) => console.error(error));
+                success_logout.children().last().append('').text('');
+                success_logout.children().last().append('').text(`Proses Logout Berhasil`);
+
+                axios.post('http://127.0.0.1:8000/logout', formData)
+                    .then((response) => {
+                        success_logout.show();
+                        const code_status = response.status;
+                        const error_logout = $('#error_logout');
+
+                        if(error_logout.is(":visible")){
+                            error_logout.hide();
+                        }
+
+                        if (code_status == 200) {
+                            localStorage.removeItem('access_token');
+                            window.location.href = 'http://127.0.0.1:8000/';
+                        }
+                    })
+                    .catch((error) => {
+                        // console.log(error.response.data.message)
+                        const error_logout = $('#error_logout');
+                        const message = error.response.data.message;
+
+                        error_logout.children().last().append('').text('');
+                        error_logout.children().last().append('').text(`${message}`);
+                        error_logout.show();
+                        btn_logout.html('Logout').attr('type', 'submit');
+                    });
             })
         });
-
-
     </script>
 </body>
 
