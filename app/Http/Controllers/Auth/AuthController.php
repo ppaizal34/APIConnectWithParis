@@ -43,7 +43,7 @@ class AuthController extends Controller
             if($user->is_admin){
                 $role_token = $user->createToken('admin_token', ['create', 'read', 'update', 'delete'])->plainTextToken;
             }else{
-                $role_token =$user->createToken('user_token', ['read_only'])->plainTextToken;
+                $role_token = $user->createToken('user_token', ['read_only'])->plainTextToken;
             }
 
             $access_token = $user->createToken('access_token', ['access_token'], Carbon::now()->addHour())->plainTextToken;
