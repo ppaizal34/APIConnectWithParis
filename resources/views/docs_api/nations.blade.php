@@ -354,7 +354,7 @@
                             </div>`;
             btn.prop('disabled', true).html(loading);
 
-            axios.get('http://127.0.0.1:8000/api/private/countries/random')
+            axios.get('http://127.0.0.1:8000/api/public/countries/random')
                 .then((response) => {
                     const status = $(`<span class="badge text-bg-success">${response.status}</span>`);
                     const message = $(`<span class="badge text-bg-success">${response.data.message}</span>`);

@@ -185,7 +185,7 @@
                     const access_token = response.data.data.token;
                     localStorage.setItem('access_token', access_token);
                     btn_login.hide();
-                    window.location.href = 'http://127.0.0.1:8000/';
+                    window.location.href = 'http://127.0.0.1:8000/admin';
                 })
                 .catch(function(error) {
                     btn_login.html('login').attr('type', 'submit');
