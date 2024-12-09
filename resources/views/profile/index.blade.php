@@ -15,6 +15,28 @@
 </head>
 
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
@@ -50,8 +72,16 @@
                                 <img src="{{ asset('assets/images_api/documents_api/copy.png') }}" id="btn_copy"
                                     alt="Copy" width="25" height="25" />
                             </button>
-                            <input type="text" class="form-control" id="token" readonly />
+                            <input type="hidden" class="form-control" id="token" readonly />
                         </div>
+
+                        <!-- Tombol Expired Access Token -->
+                        <div class="mb-3">
+                            <label for="created_at" class="form-label fw-bold">Expired Access Token</label>
+                            <input type="text" class="form-control" id="expired_access_token" value=""
+                                readonly />
+                        </div>
+
                         <div class="mb-3">
                             <label for="created_at" class="form-label fw-bold">Account Created At</label>
                             <input type="text" class="form-control" id="created_at" value="{{ $user->created_at }}"
@@ -79,7 +109,7 @@
                             <h6></h6>
                         </div>
 
-                        {{-- Jika login error --}}
+                        {{-- Jika logout error --}}
                         <div id="error_logout" class="alert alert-danger" role="alert" style="display: none">
                             <h6>Warning!</h6>
                             <h6></h6>
@@ -103,6 +133,7 @@
 
     <!-- Tambahkan Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
     <script>
         const access_token = $("#token");
         const getToken = localStorage.getItem("access_token");
@@ -148,7 +179,7 @@
                         const code_status = response.status;
                         const error_logout = $('#error_logout');
 
-                        if(error_logout.is(":visible")){
+                        if (error_logout.is(":visible")) {
                             error_logout.hide();
                         }
 
@@ -168,6 +199,51 @@
                         btn_logout.html('Logout').attr('type', 'submit');
                     });
             })
+
+            // Ambil expired_access_token dari localStorage
+            const expiredTime = localStorage.getItem('expired_access_token');
+
+            if (!expiredTime) {
+                $('#expired_access_token').val('Token tidak ditemukan.');
+                return;
+            }
+
+            // Konversi waktu ke format Date
+            const targetTime = new Date(expiredTime);
+
+            // Fungsi untuk menghitung mundur
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetTime - now;
+
+                if (diff <= 0) {
+                    $('#expired_access_token').val('Token telah kadaluwarsa!');
+                    clearInterval(interval);
+                    return;
+                }
+
+                // Hitung waktu yang tersisa
+                const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000); // Tambahkan perhitungan detik
+
+                // Format hasil singkat
+                let countdownText = '';
+                if (months > 0) countdownText = `${months} bln ${days} hr`;
+                else if (days > 0) countdownText = `${days} hr ${hours} jam`;
+                else if (hours > 0) countdownText = `${hours} jam ${minutes} mnt`;
+                else if (minutes > 0) countdownText = `${minutes} mnt ${seconds} detik`;
+                else countdownText = `${seconds} detik`; // Jika hanya detik tersisa
+
+                // Tampilkan waktu singkat
+                $('#expired_access_token').val(`Kadaluwarsa: ${countdownText}`);
+            }
+
+            // Jalankan countdown setiap detik
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Panggil langsung untuk menampilkan pertama kali
         });
     </script>
 </body>

@@ -174,6 +174,7 @@
 
             axios.post('http://127.0.0.1:8000/login', formData)
                 .then(function(response) {
+                    console.log(response.data);
                     // console.log(response.data.message);
                     success_login.show();
                     const error_login = $('#error_login');
@@ -183,9 +184,11 @@
                     }
                     
                     const access_token = response.data.data.token;
+                    const expired_access_token = response.data.data.expired_access_token;
                     localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('expired_access_token', expired_access_token);
                     btn_login.hide();
-                    window.location.href = 'http://127.0.0.1:8000/admin';
+                    // window.location.href = 'http://127.0.0.1:8000/admin';
                 })
                 .catch(function(error) {
                     btn_login.html('login').attr('type', 'submit');
@@ -250,6 +253,7 @@
 
             axios.post('http://127.0.0.1:8000/register', formData)
                 .then(function(response) {
+                    // console.log(response.data);
                     const access_token = response.data.data.token;
                     localStorage.setItem('access_token', access_token);
 
