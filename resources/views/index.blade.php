@@ -8,10 +8,42 @@
     {{-- CDN Bootsrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    {{-- CDN jquery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        {{-- CDN axios --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Link carousel.css -->
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#about-scroll">
+
+    <!-- Modal -->
+    @auth
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Token Anda Sudah Kadaluwarsa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <form method="GET" action="/my-profile">
+                        <button type="submit" class="btn btn-warning">
+                            Refresh Token
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endauth
+
     <header data-bs-theme="dark">
         <nav id="about-scroll" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid px-5">
@@ -270,5 +302,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
+
+
 </body>
 </html>

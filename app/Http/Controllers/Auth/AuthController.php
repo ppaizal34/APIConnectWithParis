@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -48,8 +49,10 @@ class AuthController extends Controller
 
             // $expired_access_token = Carbon::now()->addHours(24);
             $expired_access_token = Carbon::now()->addSeconds(30);
+            $expired_refresh_token = Carbon::now()->addHours(24);
+
             $access_token = $user->createToken('access_token', ['access_token'], $expired_access_token)->plainTextToken;
-            $refresh_token = $user->createToken('refresh_token', ['issue-access-token'])->plainTextToken;
+            $refresh_token = $user->createToken('refresh_token', ['issue-access-token'], $expired_refresh_token)->plainTextToken;
 
             $request->session()->regenerate();
 
@@ -62,9 +65,11 @@ class AuthController extends Controller
                     'expired_access_token' => $expired_access_token,
                     'role_token' => $role_token,
                     'token' => $access_token,
-                    'refresh_token' => $refresh_token
+                    'refresh_token' => $refresh_token,
+                    'expired_refresh_token' => $expired_refresh_token,
                 ]
             ], 200);
+
             // return redirect()->intended('/')->with('success', 'Proses login berhasil');
         }
 
@@ -141,4 +146,27 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+    public function refresh_token(Request $request)
+    {
+        // dd('test');
+        DB::table('personal_access_tokens')
+            ->where('tokenable_id', Auth::user()->id)
+            ->where('name', 'access_token')
+            ->delete();
+
+        $expired_access_token = Carbon::now()->addHours(24);
+        $access_token = $request->user()->createToken('access_token', ['access-api'], $expired_access_token)->plainTextToken;
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Token berhasil di perbaharui',
+            'data' => [
+                'email' => $request->user()->email,
+                'expired_access_token' => $expired_access_token,
+                'access_token' => $access_token,
+            ]
+        ], 200);
+    }
+    
 }

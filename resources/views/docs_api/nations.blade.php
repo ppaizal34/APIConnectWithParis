@@ -35,6 +35,32 @@
 </style>
 
 <body>
+    <!-- Modal -->
+    @auth
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Token Anda Sudah Kadaluwarsa</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <form method="GET" action="/my-profile">
+                            <button type="submit" class="btn btn-warning">
+                                Refresh Token
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endauth
+
     <div class="container my-5">
         <h1 class="mb-2">Countries API Documentation</h1>
         <hr>
@@ -147,7 +173,8 @@
                                     </th>
                                     <td class="position-relative">
                                         <input type="text" id="country_input" class="form-control w-100"
-                                            placeholder="Search Country" value="Indonesia" autofocus required style="cursor: pointer">
+                                            placeholder="Search Country" value="Indonesia" autofocus required
+                                            style="cursor: pointer">
                                         <span id="clear_country"
                                             class="position-absolute top-50 translate-middle-y end-0 me-3"
                                             style="cursor: pointer;">
@@ -291,6 +318,9 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
+    
     <script>
         let id_btn = '';
 
@@ -478,9 +508,9 @@
 
                     if (error.response.status == 429) {
                         startRateLimit(btn)
-                    } else if (error.response.status == 404){
+                    } else if (error.response.status == 404) {
                         btn.html('Try out').prop('disabled', false);
-                        $('#country_input').focus(); 
+                        $('#country_input').focus();
                     }
 
                     const status = $(`<span class='badge text-bg-danger'>${error.response.status}</span>`);
@@ -532,7 +562,7 @@
                         startRateLimit(btn)
                     } else if (error.response.status == 401) {
                         btn.html('Try out').prop('disabled', false);
-                        $('#token_input').focus(); 
+                        $('#token_input').focus();
                     }
 
                     console.log(error.response.status);
@@ -573,14 +603,13 @@
             }
         });
 
-        $('#clear_token').click(function (){
+        $('#clear_token').click(function() {
             $('#token_input').val('').focus();
         });
 
-        $('#clear_country').click(function (){
+        $('#clear_country').click(function() {
             $('#country_input').val('').focus();
         });
-
     </script>
 </body>
 

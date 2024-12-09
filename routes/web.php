@@ -16,6 +16,8 @@ Route::get('/admin/login', function() {
     return abort(401);
 });
 
+Route::get('refresh_token', [AuthController::class, 'refresh_token'])->name('refresh_token');
+
 // Route cache
 // Route::get('/putCache', function(){
 //     $second = 60; 

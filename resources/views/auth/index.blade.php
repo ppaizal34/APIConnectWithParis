@@ -174,7 +174,7 @@
 
             axios.post('http://127.0.0.1:8000/login', formData)
                 .then(function(response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     // console.log(response.data.message);
                     success_login.show();
                     const error_login = $('#error_login');
@@ -184,9 +184,15 @@
                     }
                     
                     const access_token = response.data.data.token;
+                    const refresh_token = response.data.data.refresh_token;
                     const expired_access_token = response.data.data.expired_access_token;
+                    const expired_refresh_token = response.data.data.expired_refresh_token;
+
                     localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('refresh_token', refresh_token);
                     localStorage.setItem('expired_access_token', expired_access_token);
+                    localStorage.setItem('expired_refresh_token', expired_refresh_token);
+
                     btn_login.hide();
                     // window.location.href = 'http://127.0.0.1:8000/admin';
                 })

@@ -16,26 +16,6 @@
 
 <body>
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -82,6 +62,7 @@
                                 readonly />
                         </div>
 
+                        {{-- Account Created At --}}
                         <div class="mb-3">
                             <label for="created_at" class="form-label fw-bold">Account Created At</label>
                             <input type="text" class="form-control" id="created_at" value="{{ $user->created_at }}"
@@ -98,9 +79,21 @@
 
                         <!-- Tombol Reset Token -->
                         <div class="d-grid mb-3">
-                            <button type="button" class="btn btn-warning" disabled>
+                            <button type="button" class="btn btn-warning" id="refresh_token" disabled>
                                 Reset API Token
                             </button>
+                        </div>
+
+                        {{-- Jika Reset API Token error --}}
+                        <div id="error_reset_api" class="alert alert-danger" role="alert" style="display: none">
+                            <h6>Warning!</h6>
+                            <h6>Reset Token Gagal!</h6>
+                        </div>
+
+                        {{-- Jika Reset API Token success --}}
+                        <div class="alert alert-info" id="success_reset_api" role="alert" style="display: none">
+                            <h6>Info!</h6>
+                            <h6>Reset Token Berhasil!</h6>
                         </div>
 
                         {{-- Jika logout success --}}
@@ -133,7 +126,7 @@
 
     <!-- Tambahkan Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
     <script>
         const access_token = $("#token");
         const getToken = localStorage.getItem("access_token");
@@ -198,7 +191,28 @@
                         error_logout.show();
                         btn_logout.html('Logout').attr('type', 'submit');
                     });
-            })
+            });
+
+            $('#refresh_token').click(function() {
+                const success_reset_api_view = $('#success_reset_api');
+                const error_reset_api_view = $('#error_reset_api');
+
+                axios.get('http://127.0.0.1:8000/refresh_token')
+                .then((response) => {
+                    // console.log(response.data);
+                    const access_token = response.data.data.access_token;
+                    const expired_access_token = response.data.data.expired_access_token;
+
+                    localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('expired_access_token', expired_access_token);
+
+                    success_reset_api_view.show();    
+                })
+                .catch((error) => {
+                    // console.log(error);
+                    error_reset_api_view.show();
+                });
+            });
 
             // Ambil expired_access_token dari localStorage
             const expiredTime = localStorage.getItem('expired_access_token');
@@ -209,6 +223,7 @@
             }
 
             // Konversi waktu ke format Date
+            const now = new Date();
             const targetTime = new Date(expiredTime);
 
             // Fungsi untuk menghitung mundur
@@ -219,6 +234,8 @@
                 if (diff <= 0) {
                     $('#expired_access_token').val('Token telah kadaluwarsa!');
                     clearInterval(interval);
+                    const btn_reset_api = $('#refresh_token');
+                    btn_reset_api.prop('disabled', false);
                     return;
                 }
 
@@ -243,7 +260,7 @@
 
             // Jalankan countdown setiap detik
             const interval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // Panggil langsung untuk menampilkan pertama kali
+            updateCountdown();
         });
     </script>
 </body>
