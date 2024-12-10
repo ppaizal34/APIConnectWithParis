@@ -9,7 +9,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Section as FormSection;
+use Filament\Infolists\Components\Section as InfoSection;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -30,7 +31,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('User')
+                FormSection::make('User')
                     ->description('Create user on here')
                     ->schema([
                         TextInput::make('name')->required()
@@ -53,6 +54,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('No')->rowIndex(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('email')->sortable()->searchable(),
                 IconColumn::make('is_admin')->boolean(),
@@ -69,7 +71,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -98,7 +100,7 @@ class UserResource extends Resource
                 TextEntry::make('name'),
                 TextEntry::make('email'),
                 TextEntry::make('created_at'),
-                Section::make('Media')
+                InfoSection::make('Media')
                     ->description('Images used in the page layout.'),
             ])->columns(3);
             

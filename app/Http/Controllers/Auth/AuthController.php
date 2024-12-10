@@ -47,8 +47,8 @@ class AuthController extends Controller
                 $role_token = $user->createToken('user_token', ['read_only'])->plainTextToken;
             }
 
-            // $expired_access_token = Carbon::now()->addHours(24);
-            $expired_access_token = Carbon::now()->addSeconds(30);
+            $expired_access_token = Carbon::now()->addHours(24);
+            // $expired_access_token = Carbon::now()->addSeconds(30);
             $expired_refresh_token = Carbon::now()->addHours(24);
 
             $access_token = $user->createToken('access_token', ['access_token'], $expired_access_token)->plainTextToken;

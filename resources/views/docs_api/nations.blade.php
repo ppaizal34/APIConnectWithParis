@@ -372,7 +372,7 @@
             btn.attr('id', id_btn).text('Try out');
         });
 
-        $(document).on('click', '#btn_random_api', function() {
+        $(document).on('click', '#btn_random_api', function() {  
             const accordionItem = $(this).closest('.accordion-item');
             const btn = $(this);
             const info_status = accordionItem.find('#status');

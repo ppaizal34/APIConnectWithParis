@@ -10,7 +10,8 @@ use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Section as FormSection;
+use Filament\Infolists\Components\Section as InfoSection;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Group;
@@ -33,7 +34,7 @@ class CountryResource extends Resource
     {
         return $form
         ->schema([
-            Section::make('Country')
+            FormSection::make('Country')
                 ->description('Put the country details in')
                 ->schema([
                     TextInput::make('country_name')
@@ -43,7 +44,7 @@ class CountryResource extends Resource
                         ->options([
                             'Yes' => 'Yes',
                             'No' => 'No',
-                        ]), // Tambahkan koma di sini
+                        ]),
         
                     TextInput::make('country_codes')
                         ->required(),
@@ -99,6 +100,7 @@ class CountryResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('No')->rowIndex(),
                 TextColumn::make('country_name')->searchable(),
                 TextColumn::make('capital_city'),
                 TextColumn::make('country_codes'),
@@ -154,7 +156,7 @@ class CountryResource extends Resource
     {
         return $infolist
             ->schema([
-                Section::make('View Country')
+                InfoSection::make('View Country')
                 ->headerActions([
                     Action::make('edit')
                         ->label('Edit')

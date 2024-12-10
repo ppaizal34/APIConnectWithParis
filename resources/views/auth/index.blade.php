@@ -194,7 +194,7 @@
                     localStorage.setItem('expired_refresh_token', expired_refresh_token);
 
                     btn_login.hide();
-                    // window.location.href = 'http://127.0.0.1:8000/admin';
+                    window.location.href = 'http://127.0.0.1:8000/admin';
                 })
                 .catch(function(error) {
                     btn_login.html('login').attr('type', 'submit');
