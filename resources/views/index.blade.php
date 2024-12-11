@@ -179,9 +179,9 @@
             <h1 class="text-center mb-4">Layanan API Yang Tersedia</h1>
             <hr>
             <div class="row">
-
+                {{-- Nations API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/nation.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
+                    <img src="{{ asset('assets/images_api/nation.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
                     <h2 class="fw-normal">Nations API</h2>
                     <p>
                         APIConnectWithParis memungkinkan Anda menjelajahi data negara, termasuk populasi, ibu kota, dan status global.
@@ -192,13 +192,14 @@
                         </a>
                     </p>
                 </div>
-            
+                
+                {{-- Emojis API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">Images API</h2>
+                    <img src="{{ asset('assets/images_api/emoji.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Emojis API</h2>
                     <p>
-                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
-                    </p>
+                        APIConnectWithParis menyediakan emoji beragam, mulai dari ekspresi wajah hingga simbol budaya.
+                    </p>                                       
                     <p class="mt-auto">
                         <a class="btn btn-secondary" href="#">
                             Get Documention
@@ -206,12 +207,13 @@
                     </p>
                 </div>
 
+                {{-- File Management API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">Images API</h2>
+                    <img src="{{ asset('assets/images_api/file_management.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">File Management API</h2>
                     <p>
-                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
-                    </p>
+                        APIConnectWithParis menyediakan layanan penyimpanan file sementara untuk kebutuhan pengelolaan data.
+                    </p>                    
                     <p class="mt-auto">
                         <a class="btn btn-secondary" href="#">
                             Get Documention
