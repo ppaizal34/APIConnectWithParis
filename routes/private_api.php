@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::prefix('countries')
     ->group(function () {
@@ -8,3 +9,4 @@ Route::prefix('countries')
         Route::get('/', [CountryController::class, 'index']);
         Route::get('/{country}', [CountryController::class, 'show']);
     });
+

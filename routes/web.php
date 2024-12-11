@@ -1,20 +1,69 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Doc\DocController;
-use App\Http\Controllers\GetApi\GetApiController;
-use App\Http\Controllers\User\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Doc\DocController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\GetApi\GetApiController;
 
 Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/doc', function (){
-//     return view('doc_api.index');
+Route::get('/admin/login', function() {
+    return abort(401);
+});
+
+Route::get('refresh_token', [AuthController::class, 'refresh_token'])->name('refresh_token');
+
+// Route cache
+// Route::get('/putCache', function(){
+//     $second = 60; 
+//     $user = User::all(); // Konversi ke array
+//     Cache::put('user', $user, $second);
 // });
 
+// Route::get('/getCache', function () {
+//     $users = Cache::get('user');
+//     return view('cache.index', ['users' => $users]);
+// });
 
+Route::get('/getUser', function() {
+    $second = '120';
+    $user = Cache::remember('users', $second, function(){
+        return User::all();
+    });
+
+    return view('cache.index', [
+        'users' => $user
+    ]);
+
+});
+
+Route::get('/noCache', function(){
+    $user = User::all();
+    return view('cache.index', [
+        'users' => $user 
+    ]);
+});
+
+// Route::get('/cache', function(){
+//     $value = Cache::remember('users', 4, function () {
+//         return User::all();
+//     });
+
+//     return $value;
+// });
+
+// Route::get('/cache2', function(){
+//     $value = Cache::remember('users', 4, function () {
+//         return User::Count();
+//     });
+
+//     return $value;
+// });
 
 // Route documents API
 Route::controller(DocController::class)
@@ -38,10 +87,5 @@ Route::controller(UserController::class)
     Route::get('my-profile', 'my_profile')->name('my-profile');
 });
 
-// Route::prefix('/')
-// ->controller(GetApiController::class)
-// ->group(function (){
-//     Route::get('nation', 'doc_nation')->name('doc_nation');
-// });
 
 

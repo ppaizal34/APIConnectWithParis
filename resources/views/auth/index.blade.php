@@ -66,17 +66,16 @@
                 {{-- Jika login error --}}
                 <div id="error_login" class="alert alert-danger" role="alert" style="display: none">
                     <h6>Warning!</h6>
-                    <h6>x</h6>
+                    <h6></h6>
                 </div>
 
-
                 {{-- Jika login success --}}
-                @if (session('success'))
-                    <div class="alert alert-info" role="alert">
-                        <h6>Info!</h6>
-                        {{ session('success') }}
-                    </div>
-                    @endif @if (request()->is('login'))
+                <div class="alert alert-info" id="success_login" role="alert" style="display: none">
+                    <h6>Info!</h6>
+                    <h6></h6>
+                </div>
+               
+                    @if (request()->is('login'))
                         {{-- Btn Login --}}
                         <button type="submit" id="btn_login" class="btn btn-primary w-100 fs-5 mb-3">
                             Login
@@ -164,20 +163,47 @@
             event.preventDefault();
             const formData = new FormData(form);
 
+            const loading = `<div class="spinner-border text-light" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>`;
+            const btn_login = $('#btn_login').html(loading).attr('type', 'button');
+            const success_login = $('#success_login');
+
+            success_login.children().last().append('').text('');
+            success_login.children().last().append('').text(`Proses Login Berhasil`);
+
             axios.post('http://127.0.0.1:8000/login', formData)
                 .then(function(response) {
-                    const access_token = response.data.data.token;
-                    localStorage.setItem('access_token', access_token);
+                    // console.log(response.data);
+                    // console.log(response.data.message);
+                    success_login.show();
+                    const error_login = $('#error_login');
 
-                    window.location.href = 'http://127.0.0.1:8000/';
+                    if(error_login.is(":visible")){
+                        error_login.hide();
+                    }
+                    
+                    const access_token = response.data.data.token;
+                    const refresh_token = response.data.data.refresh_token;
+                    const expired_access_token = response.data.data.expired_access_token;
+                    const expired_refresh_token = response.data.data.expired_refresh_token;
+
+                    localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('refresh_token', refresh_token);
+                    localStorage.setItem('expired_access_token', expired_access_token);
+                    localStorage.setItem('expired_refresh_token', expired_refresh_token);
+
+                    btn_login.hide();
+                    window.location.href = 'http://127.0.0.1:8000/admin';
                 })
                 .catch(function(error) {
+                    btn_login.html('login').attr('type', 'submit');
                     const error_login = $('#error_login');
                     const message = error.response.data.message;
                     const code_status = error.status;
 
-                    error_login.children().last().append('paris').text('');
-                    error_login.children().last().append('paris').text(`${message}`);
+                    error_login.children().last().append('').text('');
+                    error_login.children().last().append('').text(`${message}`);
                     error_login.show();
                 });
         }
@@ -233,6 +259,7 @@
 
             axios.post('http://127.0.0.1:8000/register', formData)
                 .then(function(response) {
+                    // console.log(response.data);
                     const access_token = response.data.data.token;
                     localStorage.setItem('access_token', access_token);
 

@@ -8,10 +8,42 @@
     {{-- CDN Bootsrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    {{-- CDN jquery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        {{-- CDN axios --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Link carousel.css -->
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#about-scroll">
+
+    <!-- Modal -->
+    @auth
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Token Anda Sudah Kadaluwarsa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <form method="GET" action="/my-profile">
+                        <button type="submit" class="btn btn-warning">
+                            Refresh Token
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endauth
+
     <header data-bs-theme="dark">
         <nav id="about-scroll" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid px-5">
@@ -147,9 +179,9 @@
             <h1 class="text-center mb-4">Layanan API Yang Tersedia</h1>
             <hr>
             <div class="row">
-
+                {{-- Nations API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/nation.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
+                    <img src="{{ asset('assets/images_api/nation.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
                     <h2 class="fw-normal">Nations API</h2>
                     <p>
                         APIConnectWithParis memungkinkan Anda menjelajahi data negara, termasuk populasi, ibu kota, dan status global.
@@ -160,13 +192,14 @@
                         </a>
                     </p>
                 </div>
-            
+                
+                {{-- Emojis API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">Images API</h2>
+                    <img src="{{ asset('assets/images_api/emoji.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Emojis API</h2>
                     <p>
-                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
-                    </p>
+                        APIConnectWithParis menyediakan emoji beragam, mulai dari ekspresi wajah hingga simbol budaya.
+                    </p>                                       
                     <p class="mt-auto">
                         <a class="btn btn-secondary" href="#">
                             Get Documention
@@ -174,12 +207,13 @@
                     </p>
                 </div>
 
+                {{-- File Management API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="rounded img-fluid mb-3 border border-black" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">Images API</h2>
+                    <img src="{{ asset('assets/images_api/file_management.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">File Management API</h2>
                     <p>
-                        APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
-                    </p>
+                        APIConnectWithParis menyediakan layanan penyimpanan file sementara untuk kebutuhan pengelolaan data.
+                    </p>                    
                     <p class="mt-auto">
                         <a class="btn btn-secondary" href="#">
                             Get Documention
@@ -270,5 +304,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
+
+
 </body>
 </html>
