@@ -66,7 +66,7 @@ Route::get('/noCache', function(){
 // });
 
 Route::get('upload', function() {
-    return view('docs_api.emoji');
+    return view('docs_api.file_management');
 });
 
 // Route documents API
