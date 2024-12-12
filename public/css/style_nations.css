@@ -1,0 +1,18 @@
+#token_input {
+    padding-right: 2.5rem;
+    /* Memberikan ruang untuk ikon */
+}
+
+#clear_token {
+    color: gray;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    /* Efek transisi untuk hover */
+}
+
+#clear_token:hover {
+    color: red;
+    /* Warna berubah menjadi merah saat di-hover */
+    transform: scale(1.2);
+    /* Sedikit memperbesar ikon */
+}

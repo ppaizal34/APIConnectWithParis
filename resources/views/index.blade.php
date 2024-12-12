@@ -201,7 +201,7 @@
                         APIConnectWithParis menyediakan emoji beragam, mulai dari ekspresi wajah hingga simbol budaya.
                     </p>                                       
                     <p class="mt-auto">
-                        <a class="btn btn-secondary" href="#">
+                        <a class="btn btn-secondary" href="{{ route('doc_emojis') }}">
                             Get Documention
                         </a>
                     </p>
@@ -301,12 +301,11 @@
         </footer>
 
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+    <!-- CDN Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
-
-
 </body>
 </html>

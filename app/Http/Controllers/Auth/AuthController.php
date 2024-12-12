@@ -16,7 +16,8 @@ class AuthController extends Controller
     public function show_login()
     {
         $data = [
-            'route' => 'authenticate'
+            'title' => 'Login',
+            'route' => 'authenticate',
         ];
 
         return view('auth.index', $data);
@@ -25,6 +26,7 @@ class AuthController extends Controller
     public function show_register()
     {
         $data = [
+            'title' => 'Register',
             'route' => 'register'
         ];
 

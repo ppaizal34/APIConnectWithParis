@@ -5,18 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    {{-- Title --}}
+    <title>APIConnectWithParis | {{ $title }}</title>
     {{-- CDN axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- CDN jquery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     {{-- CDN Bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('assets/css/sign-in.css') }}" />
 </head>
-
 <body class="bg-body-tertiary">
     <main class="container-fluid vh-100 d-flex align-items-center">
         <div class="container">
@@ -122,170 +120,11 @@
             </form>
         </div>
     </main>
+    {{-- CDN Jquery-Validate --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script>
-   $(document).ready(function() {
-
-    $('#login').validate({
-        rules: {
-            email: {
-                required: true,
-                email: true,
-                regex: /^[a-zA-Z0-9._%+-]+@gmail\.com$/
-            },
-            password: {
-                required: true,
-            }
-        },
-        messages: {
-            email: {
-                required: "Email tidak boleh kosong.",
-                email: "Masukkan email yang valid.",
-                regex: "Masukkan alamat email Gmail yang valid."  // Pesan error untuk regex
-            },
-            password: {
-                required: "Password tidak boleh kosong.",
-            }
-        },
-        errorPlacement: function(error, element) {
-            element.siblings('.invalid-feedback').find('span').html(error);
-        },
-        highlight: function(element) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function(element) {
-            $(element).removeClass('is-invalid');
-        },
-        submitHandler: function(form) {
-            event.preventDefault();
-            const formData = new FormData(form);
-
-            const loading = `<div class="spinner-border text-light" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>`;
-            const btn_login = $('#btn_login').html(loading).attr('type', 'button');
-            const success_login = $('#success_login');
-
-            success_login.children().last().append('').text('');
-            success_login.children().last().append('').text(`Proses Login Berhasil`);
-
-            axios.post('http://127.0.0.1:8000/login', formData)
-                .then(function(response) {
-                    // console.log(response.data);
-                    // console.log(response.data.message);
-                    success_login.show();
-                    const error_login = $('#error_login');
-
-                    if(error_login.is(":visible")){
-                        error_login.hide();
-                    }
-                    
-                    const access_token = response.data.data.token;
-                    const refresh_token = response.data.data.refresh_token;
-                    const expired_access_token = response.data.data.expired_access_token;
-                    const expired_refresh_token = response.data.data.expired_refresh_token;
-
-                    localStorage.setItem('access_token', access_token);
-                    localStorage.setItem('refresh_token', refresh_token);
-                    localStorage.setItem('expired_access_token', expired_access_token);
-                    localStorage.setItem('expired_refresh_token', expired_refresh_token);
-
-                    btn_login.hide();
-                    window.location.href = 'http://127.0.0.1:8000/admin';
-                })
-                .catch(function(error) {
-                    btn_login.html('login').attr('type', 'submit');
-                    const error_login = $('#error_login');
-                    const message = error.response.data.message;
-                    const code_status = error.status;
-
-                    error_login.children().last().append('').text('');
-                    error_login.children().last().append('').text(`${message}`);
-                    error_login.show();
-                });
-        }
-    });
-
-    $('#register').validate({
-        rules: {
-            name: {
-                required: true,
-                minlength: 3,
-                maxlength: 255,
-            },
-            email: {
-                required: true,
-                email: true,
-                regex: /^[a-zA-Z0-9._%+-]+@gmail\.com$/
-            },
-            password: {
-                required: true,
-                minlength: 8,
-                maxlength: 255,
-            }
-        },
-        messages: {
-            name: {
-                required: 'Nama tidak boleh kosong',
-                minlength: 'Nama minimal 3 karakter',
-                maxlength: 'Nama maksimal 255 karakter',
-            },
-            email: {
-                required: "Email tidak boleh kosong.",
-                email: "Masukkan email yang valid.",
-                regex: "Masukkan alamat email Gmail yang valid."  // Pesan error untuk regex
-            },
-            password: {
-                required: "Password tidak boleh kosong.",
-                minlength: 'Password minimal 3 karakter',
-                maxlength: 'Password maksimal 255 karakter',
-            }
-        },
-        errorPlacement: function(error, element) {
-            element.siblings('.invalid-feedback').find('span').html(error);
-        },
-        highlight: function(element) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function(element) {
-            $(element).removeClass('is-invalid');
-        },
-        submitHandler: function(form) {
-            event.preventDefault();
-            const formData = new FormData(form);
-
-            axios.post('http://127.0.0.1:8000/register', formData)
-                .then(function(response) {
-                    // console.log(response.data);
-                    const access_token = response.data.data.token;
-                    localStorage.setItem('access_token', access_token);
-
-                    window.location.href = 'http://127.0.0.1:8000/';
-                })
-                .catch(function(error) {
-                    console.log(error)
-                    const error_login = $('#error_login');
-                    const message = error.response.data.message;
-                    const code_status = error.status;
-
-                    error_login.children().last().text('');
-
-                    error_login.children().last().append(`${message}`);
-                    error_login.show();
-                });
-        }
-    });
-
-    $.validator.addMethod("regex", function(value, element, pattern) {
-        return this.optional(element) || pattern.test(value);
-    }, "Format tidak valid.");
-
-});
-
-    </script>
+    {{-- CDN Jquery --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {{-- Script Auth --}}
+    <script src="{{ asset('js/auth.js') }}"></script>
 </body>
-
 </html>

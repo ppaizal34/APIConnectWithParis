@@ -11,4 +11,9 @@ class DocController extends Controller
     {
         return view('docs_api.nations');
     }
+
+    public function docs_emojis()
+    {
+        return view('docs_api.emoji');
+    }
 }
