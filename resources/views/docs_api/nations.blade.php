@@ -68,7 +68,7 @@
                                 <tr>
                                     <th scope="row">URL</th>
                                     <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
-                                        <span>http://127.0.0.1:8000/api/countries</span>
+                                        <span>{{ $url_index }}</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
                                             id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
                                     </td>
@@ -123,7 +123,7 @@
                                 <tr>
                                     <th scope="row">URL</th>
                                     <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
-                                        <span>http://127.0.0.1:8000/api/countries/Indonesia</span>
+                                        <span>{{ $url_show }}</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
                                             id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
                                     </td>
@@ -192,7 +192,7 @@
                                     <th scope="row">URL</th>
                                     <td id="btn_copy" class="d-flex justify-content-between"
                                         style="cursor: pointer">
-                                        <span>http://127.0.0.1:8000/api/countries/random</span>
+                                        <span>{{ $url_random }}</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
                                             id="btn_copy" class="pt-1" alt="Copy" width="25"
                                             height="25">

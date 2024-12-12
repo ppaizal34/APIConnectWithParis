@@ -10,7 +10,7 @@ class EmojiController extends Controller
 {
     public function index()
     {
-        $emoji = Emoji::all();
+        $emoji = Emoji::all()->makeHidden(['id', 'created_at', 'updated_at']);
 
         return response()->json([
             'status' => 'success',
@@ -21,7 +21,7 @@ class EmojiController extends Controller
 
     public function paginate()
     {
-        $emoji = Emoji::paginate(5);
+        $emoji = Emoji::paginate(5)->makeHidden(['id', 'created_at', 'updated_at']);
 
         return response()->json([
             'status' => 'success',

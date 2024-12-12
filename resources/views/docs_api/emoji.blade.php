@@ -49,7 +49,7 @@
 
         <div class="accordion" id="apiDocumentation">
 
-            <!-- Endpoint: GET /api/countries -->
+            <!-- Endpoint: GET /api/emojis -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="getAllCountries">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -68,7 +68,7 @@
                                 <tr>
                                     <th scope="row">URL</th>
                                     <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
-                                        <span>http://127.0.0.1:8000/api/public/emojis</span>
+                                        <span>{{ $url_index }}</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
                                             id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
                                     </td>

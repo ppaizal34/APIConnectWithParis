@@ -65,13 +65,12 @@ $(document).on("click", "#btn_all_api", function () {
     axios
         .get("http://127.0.0.1:8000/api/public/emojis/paginate")
         .then((response) => {
-            // console.log(response.data.data.data)
-            // console.log(response.data.data[0].continent)
+            // console.log(response.data.data)
             const status = $("<span class='badge text-bg-success'>200</span>");
             const message = $(
                 `<span class='badge text-bg-success'>${response.data.message}</span>`
             );
-            const emojis = response.data.data.data;
+            const emojis = response.data.data;
             const h6 = $("<h6></h6>").text("Response:");
             const pre = $("<pre></pre>").css({
                 height: "200px",

@@ -12,7 +12,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-        $countries = Country::all();
+        $countries = Country::all()->makeHidden(['id', 'created_at', 'updated_at']);
 
         try{
             return response()->json([
@@ -31,7 +31,7 @@ class CountryController extends Controller
 
     public function random()
     {
-        $country = Country::inRandomOrder()->first();
+        $country = Country::inRandomOrder()->first()->makeHidden(['id', 'created_at', 'updated_at']);
 
         return response()->json([
             'status' => 'success',
@@ -47,7 +47,7 @@ class CountryController extends Controller
 
     public function show(string $value)
     {
-        $country = Country::where('country_name', 'like', $value . '%') ->get();
+        $country = Country::where('country_name', 'like', $value . '%')->get()->makeHidden(['id', 'created_at', 'updated_at']);
 
         if($country->isEmpty()){
             return response()->json([
