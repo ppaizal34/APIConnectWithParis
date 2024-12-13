@@ -201,21 +201,21 @@
                         APIConnectWithParis menyediakan emoji beragam, mulai dari ekspresi wajah hingga simbol budaya.
                     </p>                                       
                     <p class="mt-auto">
-                        <a class="btn btn-secondary" href="#">
+                        <a class="btn btn-secondary" href="{{ route('doc_emojis') }}">
                             Get Documention
                         </a>
                     </p>
                 </div>
 
-                {{-- File Management API --}}
+                {{-- Indonesia National Hero API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/file_management.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">File Management API</h2>
+                    <img src="{{ asset('assets/images_api/nasional_hero.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Indonesia National Hero</h2>
                     <p>
-                        APIConnectWithParis menyediakan layanan penyimpanan file sementara untuk kebutuhan pengelolaan data.
-                    </p>                    
+                        APIConnectWithParis menyediakan data pahlawan nasional Indonesia, termasuk nama dan tahun penetapan.
+                    </p>                   
                     <p class="mt-auto">
-                        <a class="btn btn-secondary" href="#">
+                        <a class="btn btn-secondary" href="{{ route('doc_national_hero') }}">
                             Get Documention
                         </a>
                     </p>
@@ -301,12 +301,11 @@
         </footer>
 
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+    <!-- CDN Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
-
-
 </body>
 </html>
