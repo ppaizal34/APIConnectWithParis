@@ -74,6 +74,7 @@ Route::controller(DocController::class)
 ->group(function (){
     Route::get('docs/nations', 'docs_nations')->name('doc_nations');
     Route::get('docs/emojis', 'docs_emojis')->name('doc_emojis');
+    Route::get('docs/national_hero', 'docs_national_hero')->name('doc_national_hero');
 });
 
 // Route AuthController

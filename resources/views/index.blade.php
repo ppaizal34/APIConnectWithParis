@@ -207,15 +207,15 @@
                     </p>
                 </div>
 
-                {{-- File Management API --}}
+                {{-- Indonesia National Hero API --}}
                 <div class="col-lg-4 d-flex flex-column">
-                    <img src="{{ asset('assets/images_api/file_management.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">File Management API</h2>
+                    <img src="{{ asset('assets/images_api/nasional_hero.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Indonesia National Hero</h2>
                     <p>
-                        APIConnectWithParis menyediakan layanan penyimpanan file sementara untuk kebutuhan pengelolaan data.
-                    </p>                    
+                        APIConnectWithParis menyediakan data pahlawan nasional Indonesia, termasuk nama dan tahun penetapan.
+                    </p>                   
                     <p class="mt-auto">
-                        <a class="btn btn-secondary" href="#">
+                        <a class="btn btn-secondary" href="{{ route('doc_national_hero') }}">
                             Get Documention
                         </a>
                     </p>

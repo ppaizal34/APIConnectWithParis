@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\NationalHero;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EmojiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\NationalHeroController;
 
 Route::prefix('countries')
     ->group(function () {
@@ -15,4 +17,9 @@ Route::prefix('countries')
 Route::prefix('emojis')
     ->group(function () {
         Route::get('/', [EmojiController::class, 'index']);
+    });
+
+Route::prefix('heroes')
+    ->group(function () {
+        Route::get('random', [NationalHeroController::class, 'random']);
     });

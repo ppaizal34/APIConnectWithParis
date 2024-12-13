@@ -37,8 +37,8 @@ $(document).ready(function() {
     
     $(document).on("click", "#btn_clear", function () {
         const accordionItem = $(this).closest(".accordion-item");
-        const search_input = $("#search_input");
         const token_input = $("#token_input");
+        const search_input = $("#search_input");
         const btn = $(this);
         const info_status = accordionItem.find("#status");
         const info_message = accordionItem.find("#message");
@@ -77,7 +77,7 @@ $(document).ready(function() {
         btn.prop("disabled", true).html(loading);
     
         axios
-            .get("http://127.0.0.1:8000/api/public/countries/random")
+            .get("http://127.0.0.1:8000/api/public/heroes/random")
             .then((response) => {
                 const status = $(
                     `<span class="badge text-bg-success">${response.status}</span>`
@@ -128,7 +128,7 @@ $(document).ready(function() {
         btn.prop("disabled", true).html(loading);
     
         axios
-            .get("http://127.0.0.1:8000/api/public/countries")
+            .get("http://127.0.0.1:8000/api/public/heroes")
             .then((response) => {
                 // console.log(response.data.data.data)
                 // console.log(response.data.data[0].continent)
@@ -190,7 +190,7 @@ $(document).ready(function() {
         btn.prop("disabled", true).html(loading);
     
         axios
-            .get(`http://127.0.0.1:8000/api/public/countries/${search_input}`)
+            .get(`http://127.0.0.1:8000/api/public/heroes/${search_input}`)
             .then((response) => {
                 const countries = response.data.data;
                 const status = $(
@@ -250,7 +250,7 @@ $(document).ready(function() {
         btn.prop("disabled", true).html(loading);
     
         axios
-            .get(`http://127.0.0.1:8000/api/private/countries/random`, {
+            .get(`http://127.0.0.1:8000/api/private/heroes/random`, {
                 headers: {
                     Authorization: `Bearer ${token_input}`,
                 },

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- Title --}}
-    <title>API Documentation | Countries</title>
+    <title>API Documentation |Indonesian national hero</title>
     {{-- CDN axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- CDN jquery --}}
@@ -44,24 +44,24 @@
     @endauth
 
     <div class="container my-5">
-        <h1 class="mb-2">Countries API Documentation</h1>
+        <h1 class="mb-2">National Hero API Documentation</h1>
         <hr>
 
         <div class="accordion" id="apiDocumentation">
 
-            <!-- Endpoint: GET /api/countries -->
+            <!-- Endpoint: GET /api/heroes -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="getAllCountries">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetAllCountries" aria-expanded="true"
                         aria-controls="collapseGetAllCountries">
-                        GET /api/countries
+                        GET /api/heroes
                     </button>
                 </h2>
                 <div id="collapseGetAllCountries" class="accordion-collapse collapse" aria-labelledby="getAllCountries"
                     data-bs-parent="#apiDocumentation">
                     <div class="accordion-body">
-                        <p>Retrieve a list of all countries.</p>
+                        <p>Retrieve a list of all heroes.</p>
 
                         <table class="table">
                             <tbody>
@@ -75,7 +75,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Endpoint</th>
-                                    <td><span class="badge text-bg-warning">/api/countries</span></td>
+                                    <td><span class="badge text-bg-warning">{{ $url_index_endpoint }}</span></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Method</th>
@@ -104,33 +104,33 @@
                 </div>
             </div>
 
-            <!-- Endpoint: GET /api/countries/{country} -->
+            <!-- Endpoint: GET /api/heroes/{name} -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="getSpecificCountry">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetSpecificCountry" aria-expanded="false"
                         aria-controls="collapseGetSpecificCountry">
-                        GET /api/countries/{country}
+                        GET /api/hero/{name}
                     </button>
                 </h2>
                 <div id="collapseGetSpecificCountry" class="accordion-collapse collapse"
                     aria-labelledby="getSpecificCountry" data-bs-parent="#apiDocumentation">
                     <div class="accordion-body">
-                        <p>Retrieve specific country information by country code or name.</p>
+                        <p>Retrieve specific hero information name.</p>
 
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <th scope="row">URL</th>
                                     <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
-                                        <span>{{ $url_show }}</span>
+                                        <span>{{ $url_spesifik }}</span>
                                         <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
                                             id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Endpoint</th>
-                                    <td><span class="badge text-bg-warning">/api/countries/{country_name}</span></td>
+                                    <td><span class="badge text-bg-warning">{{ $url_spesifik_endpoint }}</span></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Method</th>
@@ -151,11 +151,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="pt-3">
-                                        <label for="search_input">Search country:</label>
+                                        <label for="search_input">Search hero:</label>
                                     </th>
                                     <td class="position-relative">
                                         <input type="text" id="search_input" class="form-control w-100"
-                                            placeholder="Search Country" value="Indonesia" autofocus required
+                                            placeholder="Search Country" value="Soekarno" autofocus required
                                             style="cursor: pointer">
                                         <span id="clear_input"
                                             class="position-absolute top-50 translate-middle-y end-0 me-3"
@@ -172,19 +172,19 @@
                 </div>
             </div>
 
-            <!-- Endpoint: GET /api/countries/random -->
+            <!-- Endpoint: GET /api/heroes/random -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="getRandomCountry">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetRandomCountry" aria-expanded="false"
                         aria-controls="collapseGetRandomCountry">
-                        GET /api/countries/random
+                        GET /api/heroes/random
                     </button>
                 </h2>
                 <div id="collapseGetRandomCountry" class="accordion-collapse collapse"
                     aria-labelledby="getRandomCountry" data-bs-parent="#apiDocumentation">
                     <div class="accordion-body">
-                        <p>Retrieve a random country's information.</p>
+                        <p>Retrieve a random hero's information.</p>
 
                         <table class="table">
                             <tbody>
@@ -202,7 +202,7 @@
                                     <th scope="row">Endpoint</th>
                                     <td>
                                         <span class="badge text-bg-warning">
-                                            /api/countries/{country}
+                                            {{ $url_random_endpoint }}
                                         </span>
                                     </td>
                                 </tr>
@@ -302,7 +302,7 @@
     {{-- CDN Script JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Script Nations JS --}}
-    <script src="{{ asset('js/nations.js') }}"></script>
+    <script src="{{ asset('js/national_hero.js') }}"></script>
     {{-- Script check-token-expiry JS --}}
     <script src="{{ asset('js/check-token-expiry.js') }}"></script>
     {{-- Script check-refreshtoken-expiry JS --}}
