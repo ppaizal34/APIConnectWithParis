@@ -37,6 +37,7 @@ $(document).on("click", "#btn_copy", function () {
 $(document).on("click", "#btn_clear", function () {
     const accordionItem = $(this).closest(".accordion-item");
     const btn = $(this);
+    const token_input = $("#token_input");
     const info_status = accordionItem.find("#status");
     const info_message = accordionItem.find("#message");
 
@@ -48,6 +49,11 @@ $(document).on("click", "#btn_clear", function () {
 
     // Kembalikan tombol ke state awal sebagai "Try out"
     btn.attr("id", id_btn).text("Try out");
+
+    if(token_input.val() == ''){
+        const btn_test_token = $('#btn_test_token');
+        btn_test_token.prop('disabled', true);
+    }
 });
 
 $(document).on("click", "#btn_all_api", function () {
@@ -130,23 +136,16 @@ $(document).on("click", "#btn_test_token", function () {
             },
         })
         .then((response) => {
-            console.log(response.data.data);
+            console.log(response.data);
             const status = $(
                 `<span class="badge text-bg-success">${response.status}</span>`
             );
             const message = $(
                 `<span class="badge text-bg-success">${response.data.message}</span>`
             );
-            const emojis = response.data.data;
+            const data = JSON.stringify(response.data, null, 2);
             const h6 = $("<h6></h6>").text("response");
-            const pre = $("<pre></pre>").css({
-                height: "200px",
-                "overflow-x": "hidden",
-            });;
-
-            emojis.forEach((emoji) => {
-                pre.append(JSON.stringify(emoji, null, 2) + "\n");
-            })
+            const pre = $("<pre></pre>").text(data);
 
             $(info_status).html(status);
             $(info_message).html(message);
@@ -180,6 +179,7 @@ $(document).on("click", "#btn_test_token", function () {
         });
 });
 
+
 $("#token_input").on("input", function () {
     const token_input = $(this);
     const btn_test_token = $("#btn_test_token");
@@ -195,9 +195,9 @@ $("#token_input").on("input", function () {
 });
 
 $("#clear_token").click(function () {
+    const btn_test_token = $('#btn_test_token');
     $("#token_input").val("").focus();
+    btn_test_token.prop('disabled', true);
 });
 
-$("#clear_country").click(function () {
-    $("#country_input").val("").focus();
-});
+

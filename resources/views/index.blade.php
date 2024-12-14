@@ -210,12 +210,26 @@
                 {{-- Indonesia National Hero API --}}
                 <div class="col-lg-4 d-flex flex-column">
                     <img src="{{ asset('assets/images_api/nasional_hero.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
-                    <h2 class="fw-normal">Indonesia National Hero</h2>
+                    <h2 class="fw-normal">Indonesia National Hero API</h2>
                     <p>
                         APIConnectWithParis menyediakan data pahlawan nasional Indonesia, termasuk nama dan tahun penetapan.
                     </p>                   
                     <p class="mt-auto">
                         <a class="btn btn-secondary" href="{{ route('doc_national_hero') }}">
+                            Get Documention
+                        </a>
+                    </p>
+                </div>
+
+                {{-- Volcano API --}}
+                <div class="col-lg-4 d-flex flex-column">
+                    <img src="{{ asset('assets/images_api/volcano.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Volcanoes Indonesia API</h2>
+                    <p>
+                        APIConnectWithParis menyediakan data gunung berapi di Indonesia, termasuk nama dan lokasi.
+                    </p>                
+                    <p class="mt-auto">
+                        <a class="btn btn-secondary" href="{{ route('docs_volcano') }}">
                             Get Documention
                         </a>
                     </p>

@@ -44,12 +44,12 @@
     @endauth
 
     <div class="container my-5">
-        <h1 class="mb-2">Emojis API Documentation</h1>
+        <h1 class="mb-2">Countries API Documentation</h1>
         <hr>
 
         <div class="accordion" id="apiDocumentation">
 
-            <!-- Endpoint: GET /api/emojis -->
+            <!-- Endpoint: GET /api/volcanoes -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="getAllCountries">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -61,7 +61,7 @@
                 <div id="collapseGetAllCountries" class="accordion-collapse collapse" aria-labelledby="getAllCountries"
                     data-bs-parent="#apiDocumentation">
                     <div class="accordion-body">
-                        <p>Retrieve a list of all emojis.</p>
+                        <p>Retrieve a list of all countries.</p>
 
                         <table class="table">
                             <tbody>
@@ -75,7 +75,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Endpoint</th>
-                                    <td><span class="badge text-bg-warning">/api/public/emojis</span></td>
+                                    <td><span class="badge text-bg-warning">{{ $url_index_endpoint }}</span></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Method</th>
@@ -100,6 +100,137 @@
                         <button id="btn_all_api" class="btn btn-danger mb-3">
                             Try out
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endpoint: GET /api/volcanoes/{name} -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="getSpecificCountry">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseGetSpecificCountry" aria-expanded="false"
+                        aria-controls="collapseGetSpecificCountry">
+                        {{ $title_spesifik }}
+                    </button>
+                </h2>
+                <div id="collapseGetSpecificCountry" class="accordion-collapse collapse"
+                    aria-labelledby="getSpecificCountry" data-bs-parent="#apiDocumentation">
+                    <div class="accordion-body">
+                        <p>Retrieve specific country information by country code or name.</p>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">URL</th>
+                                    <td id="btn_copy" class="d-flex justify-content-between" style="cursor: pointer">
+                                        <span>{{ $url_spesifik }}</span>
+                                        <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
+                                            id="btn_copy" class="pt-1" alt="Copy" width="25" height="25">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Endpoint</th>
+                                    <td>
+                                        <span class="badge text-bg-warning">
+                                            {{ $url_spesifik_endpoint }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Method</th>
+                                    <td><span class="badge bg-primary">GET</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Parameters</th>
+                                    <td><span class="badge text-bg-warning">Parameters are required for this
+                                            request.</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Status</th>
+                                    <td id="status">-----</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Message</th>
+                                    <td id="message">-----</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="pt-3">
+                                        <label for="search_input">Search country:</label>
+                                    </th>
+                                    <td class="position-relative">
+                                        <input type="text" id="search_input" class="form-control w-100"
+                                            placeholder="Search Country" value="Weh" autofocus required
+                                            style="cursor: pointer">
+                                        <span id="clear_input"
+                                            class="position-absolute top-50 translate-middle-y end-0 me-3"
+                                            style="cursor: pointer;">
+                                            <i class="bi bi-x-circle"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button id="btn_spesifik_api" class="btn btn-danger mb-3">Try out</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endpoint: GET /api/volcanoes/random -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="getRandomCountry">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseGetRandomCountry" aria-expanded="false"
+                        aria-controls="collapseGetRandomCountry">
+                        {{ $title_random }}
+                    </button>
+                </h2>
+                <div id="collapseGetRandomCountry" class="accordion-collapse collapse"
+                    aria-labelledby="getRandomCountry" data-bs-parent="#apiDocumentation">
+                    <div class="accordion-body">
+                        <p>Retrieve a random country's information.</p>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">URL</th>
+                                    <td id="btn_copy" class="d-flex justify-content-between"
+                                        style="cursor: pointer">
+                                        <span>{{ $url_random }}</span>
+                                        <img src="{{ asset('assets/images_api/documents_api/copy.png') }}"
+                                            id="btn_copy" class="pt-1" alt="Copy" width="25"
+                                            height="25">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Endpoint</th>
+                                    <td>
+                                        <span class="badge text-bg-warning">
+                                            {{ $url_random_endpoint }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Method</th>
+                                    <td><span class="badge bg-primary">GET</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Parameters</th>
+                                    <td><span class="badge text-bg-info">Parameters are required for this
+                                            request.</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Status</th>
+                                    <td id="status">-----</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Message</th>
+                                    <td id="message">-----</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button id="btn_random_api" class="btn btn-danger mb-3">Try out</button>
                     </div>
                 </div>
             </div>
@@ -175,7 +306,7 @@
     {{-- CDN Script JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Script Nations JS --}}
-    <script src="{{ asset('js/emojis.js') }}"></script>
+    <script src="{{ asset('js/volcano.js') }}"></script>
     {{-- Script check-token-expiry JS --}}
     <script src="{{ asset('js/check-token-expiry.js') }}"></script>
     {{-- Script check-refreshtoken-expiry JS --}}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\EmojiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\NationalHeroController;
+use App\Http\Controllers\Api\VolcanoController;
 
 Route::prefix('countries')
     ->group(function () {
@@ -22,4 +23,9 @@ Route::prefix('emojis')
 Route::prefix('heroes')
     ->group(function () {
         Route::get('random', [NationalHeroController::class, 'random']);
+    });
+
+Route::prefix('volcanoes')
+    ->group(function () {
+        Route::get('random', [VolcanoController::class, 'random']);
     });

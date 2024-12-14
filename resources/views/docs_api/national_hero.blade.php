@@ -55,7 +55,7 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetAllCountries" aria-expanded="true"
                         aria-controls="collapseGetAllCountries">
-                        GET /api/heroes
+                        {{ $title_index }}
                     </button>
                 </h2>
                 <div id="collapseGetAllCountries" class="accordion-collapse collapse" aria-labelledby="getAllCountries"
@@ -110,7 +110,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetSpecificCountry" aria-expanded="false"
                         aria-controls="collapseGetSpecificCountry">
-                        GET /api/hero/{name}
+                        {{ $title_spesifik }}
                     </button>
                 </h2>
                 <div id="collapseGetSpecificCountry" class="accordion-collapse collapse"
@@ -178,7 +178,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetRandomCountry" aria-expanded="false"
                         aria-controls="collapseGetRandomCountry">
-                        GET /api/heroes/random
+                        {{ $title_random }}
                     </button>
                 </h2>
                 <div id="collapseGetRandomCountry" class="accordion-collapse collapse"

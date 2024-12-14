@@ -55,7 +55,7 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetAllCountries" aria-expanded="true"
                         aria-controls="collapseGetAllCountries">
-                        GET /api/countries
+                        {{ $title_index }}
                     </button>
                 </h2>
                 <div id="collapseGetAllCountries" class="accordion-collapse collapse" aria-labelledby="getAllCountries"
@@ -75,7 +75,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Endpoint</th>
-                                    <td><span class="badge text-bg-warning">/api/countries</span></td>
+                                    <td><span class="badge text-bg-warning">{{ $url_index_endpoint }}</span></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Method</th>
@@ -110,7 +110,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetSpecificCountry" aria-expanded="false"
                         aria-controls="collapseGetSpecificCountry">
-                        GET /api/countries/{country}
+                        {{ $title_spesifik }}
                     </button>
                 </h2>
                 <div id="collapseGetSpecificCountry" class="accordion-collapse collapse"
@@ -130,7 +130,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Endpoint</th>
-                                    <td><span class="badge text-bg-warning">/api/countries/{country_name}</span></td>
+                                    <td>
+                                        <span class="badge text-bg-warning">
+                                            {{ $url_spesifik_endpoint }}
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Method</th>
@@ -178,7 +182,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseGetRandomCountry" aria-expanded="false"
                         aria-controls="collapseGetRandomCountry">
-                        GET /api/countries/random
+                        {{ $title_random }}
                     </button>
                 </h2>
                 <div id="collapseGetRandomCountry" class="accordion-collapse collapse"
@@ -202,7 +206,7 @@
                                     <th scope="row">Endpoint</th>
                                     <td>
                                         <span class="badge text-bg-warning">
-                                            /api/countries/{country}
+                                            {{ $url_random_endpoint }}
                                         </span>
                                     </td>
                                 </tr>
