@@ -37,7 +37,7 @@ class CountryController extends Controller
             'status' => 'success',
             'message' => 'Countries data retrieved successfully',
             'data' => $country
-        ]);
+        ], 200);
     }
 
     public function store(Request $request)

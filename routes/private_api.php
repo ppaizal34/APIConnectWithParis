@@ -19,14 +19,25 @@ Route::prefix('countries')
 Route::prefix('emojis')
     ->group(function () {
         Route::get('random', [EmojiController::class, 'random']);
+        Route::get('/', [EmojiController::class, 'index']);
     });
 
 Route::prefix('heroes')
     ->group(function () {
         Route::get('random', [NationalHeroController::class, 'random']);
+        Route::get('/', [NationalHeroController::class, 'index']);
+        Route::get('/{name}', [NationalHeroController::class, 'spesifik_name']);
+    });
+
+Route::prefix('volcanoes')
+    ->group(function () {
+        Route::get('/', [VolcanoController::class, 'index']);
+        Route::get('random', [VolcanoController::class, 'random']);
+        Route::get('/{name}', [VolcanoController::class, 'spesifik_name']);
     });
 
 Route::prefix('islamic_prayer')
     ->group(function () {
         Route::get('random', [IslamicPrayerController::class, 'random']);
+        Route::get('/', [IslamicPrayerController::class, 'index']);
     });

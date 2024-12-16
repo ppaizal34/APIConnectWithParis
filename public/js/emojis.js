@@ -179,7 +179,6 @@ $(document).on("click", "#btn_test_token", function () {
         });
 });
 
-
 $("#token_input").on("input", function () {
     const token_input = $(this);
     const btn_test_token = $("#btn_test_token");

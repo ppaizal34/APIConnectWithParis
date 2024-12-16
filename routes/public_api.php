@@ -17,6 +17,7 @@ Route::prefix('countries')
 
 Route::prefix('emojis')
     ->group(function () {
+        Route::get('/', [EmojiController::class, 'index']);
         Route::get('paginate', [EmojiController::class, 'paginate'])->name('public.paginate');
     });
 
@@ -37,4 +38,5 @@ Route::prefix('volcanoes')
 Route::prefix('islamic_prayer')
     ->group(function () {
         Route::get('/', [IslamicPrayerController::class, 'index']);
+        Route::get('random', [IslamicPrayerController::class, 'random']);
     });
