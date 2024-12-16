@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\EmojiController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\VolcanoController;
 use App\Http\Controllers\Api\NationalHeroController;
+use App\Http\Controllers\Api\IslamicPrayerController;
 
 Route::prefix('countries')
     ->group(function () {
@@ -31,4 +32,9 @@ Route::prefix('volcanoes')
         Route::get('/', [VolcanoController::class, 'index']);
         Route::get('random', [VolcanoController::class, 'random']);
         Route::get('/{hero}', [VolcanoController::class, 'spesifik_name']);
+    });
+
+Route::prefix('islamic_prayer')
+    ->group(function () {
+        Route::get('/', [IslamicPrayerController::class, 'index']);
     });

@@ -69,7 +69,7 @@ $(document).on("click", "#btn_all_api", function () {
     btn.prop("disabled", true).html(loading);
 
     axios
-        .get("http://127.0.0.1:8000/api/public/emojis/paginate")
+        .get("http://127.0.0.1:8000/api/public/islamic_prayer/")
         .then((response) => {
             // console.log(response.data.data)
             const status = $("<span class='badge text-bg-success'>200</span>");
@@ -130,7 +130,7 @@ $(document).on("click", "#btn_test_token", function () {
     btn.prop("disabled", true).html(loading);
 
     axios
-        .get(`http://127.0.0.1:8000/api/private/emojis/random`, {
+        .get(`http://127.0.0.1:8000/api/private/islamic_prayer/random`, {
             headers: {
                 Authorization: `Bearer ${token_input}`,
             },

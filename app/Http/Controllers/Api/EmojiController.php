@@ -29,4 +29,15 @@ class EmojiController extends Controller
             'data' => $emoji
         ], 200);
     }
+
+    public function random()
+    {
+         $emoji = Emoji::inRandomOrder()->first()->makeHidden(['id', 'created_at', 'updated_at']);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Emoji data retrieved successfully',
+            'data' =>  $emoji,
+        ]);
+    }
 }

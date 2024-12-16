@@ -34,6 +34,15 @@ class DocController extends Controller
         return view('docs_api.emoji', $data);
     }
 
+    public function docs_islamic_prayer()
+    {
+        $data = [
+            'url_index' => !Auth::check() ? 'http://127.0.0.1:8000/api/public/islamic_prayer' : 'http://127.0.0.1:8000/api/private/islamic_prayer',
+            'title_index' => 'GET /api/islamic_prayer',
+        ];
+        return view('docs_api.islamic_prayer', $data);
+    }
+
     public function docs_national_hero()
     {
         $data = [

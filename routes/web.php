@@ -76,6 +76,7 @@ Route::controller(DocController::class)
     Route::get('docs/emojis', 'docs_emojis')->name('doc_emojis');
     Route::get('docs/national_hero', 'docs_national_hero')->name('doc_national_hero');
     Route::get('docs/volcano', 'docs_volcano')->name('docs_volcano');
+    Route::get('docs/islamic_prayer', 'docs_islamic_prayer')->name('docs_islamic_prayer');
 });
 
 // Route AuthController

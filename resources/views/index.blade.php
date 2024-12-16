@@ -235,6 +235,20 @@
                     </p>
                 </div>
 
+                {{-- Islamic Player API --}}
+                <div class="col-lg-4 d-flex flex-column">
+                    <img src="{{ asset('assets/images_api/islamic_prayer.jpg') }}" class="img-fluid mb-3" alt="" style="height: 200px;">
+                    <h2 class="fw-normal">Islamic Player API</h2>
+                    <p>
+                        APIConnectWithParis menyediakan kumpulan doa sehari-hari yang dapat diakses dengan mudah, membantu umat Muslim dalam beribadah dan menjalani aktivitas harian sesuai ajaran Islam.
+                    </p>               
+                    <p class="mt-auto">
+                        <a class="btn btn-secondary" href="{{ route('docs_islamic_prayer') }}">
+                            Get Documention
+                        </a>
+                    </p>
+                </div>
+
             </div>
 
             <!-- START THE FEATURETTES -->

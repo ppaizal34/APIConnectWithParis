@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EmojiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\CountryController;
-use App\Http\Controllers\Api\NationalHeroController;
 use App\Http\Controllers\Api\VolcanoController;
+use App\Http\Controllers\Api\NationalHeroController;
+use App\Http\Controllers\Api\IslamicPrayerController;
 
 Route::prefix('countries')
     ->group(function () {
@@ -17,7 +18,7 @@ Route::prefix('countries')
 
 Route::prefix('emojis')
     ->group(function () {
-        Route::get('/', [EmojiController::class, 'index']);
+        Route::get('random', [EmojiController::class, 'random']);
     });
 
 Route::prefix('heroes')
@@ -25,7 +26,7 @@ Route::prefix('heroes')
         Route::get('random', [NationalHeroController::class, 'random']);
     });
 
-Route::prefix('volcanoes')
+Route::prefix('islamic_prayer')
     ->group(function () {
-        Route::get('random', [VolcanoController::class, 'random']);
+        Route::get('random', [IslamicPrayerController::class, 'random']);
     });

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class IslamicPrayer extends Model
 {
-    //
+    protected $guarded = ['id'];
 }
