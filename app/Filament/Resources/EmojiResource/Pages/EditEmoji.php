@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\CountryResource\Pages;
+namespace App\Filament\Resources\EmojiResource\Pages;
 
-use App\Filament\Resources\CountryResource;
+use App\Filament\Resources\EmojiResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCountry extends EditRecord
+class EditEmoji extends EditRecord
 {
-    protected static string $resource = CountryResource::class;
+    protected static string $resource = EmojiResource::class;
 
     protected function getHeaderActions(): array
     {

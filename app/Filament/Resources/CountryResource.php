@@ -106,6 +106,8 @@ class CountryResource extends Resource
                 TextColumn::make('country_codes'),
                 TextColumn::make('continent'),
                 TextColumn::make('sovereign_state'),
+                TextColumn::make('created_at')->since(),
+                TextColumn::make('updated_at')->since(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('sovereign_state')
