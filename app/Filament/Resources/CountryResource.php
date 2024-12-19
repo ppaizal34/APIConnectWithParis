@@ -155,7 +155,7 @@ class CountryResource extends Resource
     {
         return $infolist
             ->schema([
-                InfoSection::make('View Country')
+                InfoSection::make('Description')
                 ->headerActions([
                     Action::make('edit')
                         ->label('Edit')
@@ -178,7 +178,7 @@ class CountryResource extends Resource
                         ->requiresConfirmation()
                         ->modalHeading('Delete Country')
                 ])
-                ->description('Prevent abuse by limiting the number of requests per period')
+                ->description('Memberikan deskripsi singkat mengenai negara, termasuk detail geografis')
                 ->schema([
                     Group::make([
                             TextEntry::make('country_name')

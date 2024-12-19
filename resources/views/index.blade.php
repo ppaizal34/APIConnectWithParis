@@ -17,8 +17,7 @@
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#about-scroll">
-
-    <!-- Modal -->
+     <!-- Modal Alert Jika masa aktif Access Token Sudah Habis -->
     @auth
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -78,6 +77,11 @@
                         </li>
                         @endguest
                         @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin') }}">
+                                Dashboard
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/my-profile') }}">
                                 <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle">
@@ -324,8 +328,11 @@
         <!-- FOOTER -->
         <footer class="container">
             <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; 2017–2024 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a
-                    href="#">Terms</a></p>
+            <p>
+                &copy; {{ now()->year }} Company, Inc. &middot; 
+                <a href="#">Privacy</a> 
+                &middot; 
+                <a href="#">Terms</a></p>
         </footer>
 
     </main>

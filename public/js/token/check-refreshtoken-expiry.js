@@ -1,5 +1,11 @@
 function check_refresh_token_expired() {
     const expiredTime = localStorage.getItem("expired_refresh_token");
+
+    // Cek apakah expired_refresh_token ada pada localStorage
+    if(!expiredTime){
+        return false;
+    }
+
     const now = new Date();
     const targetTime = new Date(expiredTime);
 

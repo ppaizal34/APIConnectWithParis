@@ -92,7 +92,7 @@ class NationalHeroResource extends Resource
     {
         return $infolist
             ->schema([
-                InfoSection::make('View Country')
+                InfoSection::make('Description')
                 ->headerActions([
                     Action::make('edit')
                         ->label('Edit')
@@ -115,7 +115,7 @@ class NationalHeroResource extends Resource
                         ->requiresConfirmation()
                         ->modalHeading('Delete Country')
                 ])
-                ->description('Prevent abuse by limiting the number of requests per period')
+                ->description('Menyajikan informasi tentang tokoh-tokoh pahlawan nasional Indonesia yang berjasa bagi bangsa')
                 ->schema([
                     InfoSection::make([
                         TextEntry::make('name'),

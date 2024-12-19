@@ -13,10 +13,37 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/login', function() {
-    return abort(401);
+    return abort(404);
 });
 
 Route::get('refresh_token', [AuthController::class, 'refresh_token'])->name('refresh_token');
+
+// Route documents API
+Route::controller(DocController::class)
+->group(function (){
+    Route::get('docs/nations', 'docs_nations')->name('doc_nations');
+    Route::get('docs/emojis', 'docs_emojis')->name('doc_emojis');
+    Route::get('docs/national_hero', 'docs_national_hero')->name('doc_national_hero');
+    Route::get('docs/volcano', 'docs_volcano')->name('docs_volcano');
+    Route::get('docs/islamic_prayer', 'docs_islamic_prayer')->name('docs_islamic_prayer');
+});
+
+// Route AuthController
+Route::controller(AuthController::class)
+->group(function () {
+    Route::get('login', 'show_login')->middleware(['guest']);
+    Route::post('login', 'authenticate')->name('authenticate');
+    Route::get('register', 'show_register')->middleware(['guest']);
+    Route::post('register', 'register')->name('register');
+    Route::post('logout', 'logout')->name('logout')->middleware('auth:sanctum');
+    Route::get('logout', 'logout_admin')->name('filament.admin.auth.login')->middleware('auth:sanctum');
+});
+
+// Route User
+Route::controller(UserController::class)
+->group(function() {
+    Route::get('my-profile', 'my_profile')->name('my-profile');
+});
 
 // Route cache
 // Route::get('/putCache', function(){
@@ -30,24 +57,24 @@ Route::get('refresh_token', [AuthController::class, 'refresh_token'])->name('ref
 //     return view('cache.index', ['users' => $users]);
 // });
 
-Route::get('/getUser', function() {
-    $second = '120';
-    $user = Cache::remember('users', $second, function(){
-        return User::all();
-    });
+// Route::get('/getUser', function() {
+//     $second = '120';
+//     $user = Cache::remember('users', $second, function(){
+//         return User::all();
+//     });
 
-    return view('cache.index', [
-        'users' => $user
-    ]);
+//     return view('cache.index', [
+//         'users' => $user
+//     ]);
 
-});
+// });
 
-Route::get('/noCache', function(){
-    $user = User::all();
-    return view('cache.index', [
-        'users' => $user 
-    ]);
-});
+// Route::get('/noCache', function(){
+//     $user = User::all();
+//     return view('cache.index', [
+//         'users' => $user 
+//     ]);
+// });
 
 // Route::get('/cache', function(){
 //     $value = Cache::remember('users', 4, function () {
@@ -65,35 +92,11 @@ Route::get('/noCache', function(){
 //     return $value;
 // });
 
-Route::get('upload', function() {
-    return view('docs_api.file_management');
-});
+// Route::get('upload', function() {
+//     return view('docs_api.file_management');
+// });
 
-// Route documents API
-Route::controller(DocController::class)
-->group(function (){
-    Route::get('docs/nations', 'docs_nations')->name('doc_nations');
-    Route::get('docs/emojis', 'docs_emojis')->name('doc_emojis');
-    Route::get('docs/national_hero', 'docs_national_hero')->name('doc_national_hero');
-    Route::get('docs/volcano', 'docs_volcano')->name('docs_volcano');
-    Route::get('docs/islamic_prayer', 'docs_islamic_prayer')->name('docs_islamic_prayer');
-});
 
-// Route AuthController
-Route::controller(AuthController::class)
-->group(function () {
-    Route::get('login', 'show_login');
-    Route::post('login', 'authenticate')->name('authenticate');
-    Route::get('register', 'show_register');
-    Route::post('register', 'register')->name('register');
-    Route::post('logout', 'logout')->name('logout')->middleware('auth:sanctum');
-});
-
-// Route User
-Route::controller(UserController::class)
-->group(function() {
-    Route::get('my-profile', 'my_profile')->name('my-profile');
-});
 
 
 

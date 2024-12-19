@@ -54,6 +54,9 @@ $(document).ready(function () {
 
                 if (code_status == 200) {
                     localStorage.removeItem("access_token");
+                    localStorage.removeItem("expired_access_token");
+                    localStorage.removeItem("expired_refresh_token");
+                    localStorage.removeItem("refresh_token");
                     window.location.href = "http://127.0.0.1:8000/";
                 }
             })

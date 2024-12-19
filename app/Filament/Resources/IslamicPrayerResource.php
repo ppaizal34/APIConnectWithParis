@@ -88,7 +88,7 @@ class IslamicPrayerResource extends Resource
     {
         return $infolist
             ->schema([
-                InfoSection::make('View Doa')
+                InfoSection::make('Description')
                 ->headerActions([
                     Action::make('edit')
                         ->label('Edit')
@@ -111,7 +111,7 @@ class IslamicPrayerResource extends Resource
                         ->requiresConfirmation()
                         ->modalHeading('Delete Islamic Prayer')
                 ])
-                ->description('Prevent abuse by limiting the number of requests per period')
+                ->description('Memberikan panduan doa harian untuk mendekatkan diri kepada Sang Pencipta')
                 ->schema([
                     InfoSection::make([
                         TextEntry::make('doa'),

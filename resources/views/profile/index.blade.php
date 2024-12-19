@@ -129,7 +129,7 @@
     {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
     {{-- Script myprofile --}}
-    <script src="{{ asset('js/myprofile.js') }}"></script>
+    <script src="{{ asset('js/view/myprofile.js') }}"></script>
 </body>
 
 </html>

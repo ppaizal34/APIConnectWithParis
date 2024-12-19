@@ -90,7 +90,7 @@ class VolcanoResource extends Resource
     {
         return $infolist
         ->schema([
-            InfoSection::make('View Volcano')
+            InfoSection::make('Description')
             ->headerActions([
                 Action::make('edit')
                     ->label('Edit')
@@ -113,7 +113,7 @@ class VolcanoResource extends Resource
                     ->requiresConfirmation()
                     ->modalHeading('Delete Volcano')
             ])
-            ->description('Prevent abuse by limiting the number of requests per period')
+            ->description('Menyajikan informasi tentang gunung berapi di Indonesia')
             ->schema([
                 InfoSection::make([
                     TextEntry::make('name'),

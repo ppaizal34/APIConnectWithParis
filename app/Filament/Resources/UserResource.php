@@ -62,7 +62,11 @@ class UserResource extends Resource
                 TextColumn::make('request_count')->sortable()->searchable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('is_admin')
+                ->options([
+                    0 => 'No',
+                    1 => 'Yes',
+                ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

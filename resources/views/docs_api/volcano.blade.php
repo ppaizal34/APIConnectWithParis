@@ -17,7 +17,7 @@
     <link href="{{ asset('css/style_nations.css') }}" rel="stylesheet">
 </head>
 <body>
-    <!-- Modal -->
+    <!-- Modal Alert Jika masa aktif Access Token Sudah Habis -->
     @auth
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -306,10 +306,10 @@
     {{-- CDN Script JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Script Nations JS --}}
-    <script src="{{ asset('js/volcano.js') }}"></script>
+    <script src="{{ asset('js/api/volcano.js') }}"></script>
     {{-- Script check-token-expiry JS --}}
-    <script src="{{ asset('js/check-token-expiry.js') }}"></script>
+    <script src="{{ asset('js/token/check-token-expiry.js') }}"></script>
     {{-- Script check-refreshtoken-expiry JS --}}
-    <script src="{{ asset('js/check-refreshtoken-expiry.js') }}"></script>
+    <script src="{{ asset('js/token/check-refreshtoken-expiry.js') }}"></script>
 </body>
 </html>

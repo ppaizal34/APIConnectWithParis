@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Auth;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Filament\Facades\Filament;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -64,6 +65,7 @@ class AuthController extends Controller
                 'data' => [
                     'name' => $user->name,
                     'email' => $user->email,
+                    'is_admin' => $user->is_admin,
                     'expired_access_token' => $expired_access_token,
                     'role_token' => $role_token,
                     'token' => $access_token,
@@ -91,6 +93,37 @@ class AuthController extends Controller
         }
     
         try {
+            // Hapus semua token pengguna (untuk API)
+            $request->user()->tokens()->delete();
+    
+            // Invalidate sesi jika menggunakan session-based
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+    
+            // Berikan respons berhasil
+            return response()->json([
+                'status' => true,
+                'message' => 'Logout berhasil',
+            ], 200);
+        } catch (\Exception $e) {
+            // Tangani error jika ada
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan saat logout',
+                'error' => $e->getMessage(),
+            ], 500); // Internal Server Error
+        }
+    }
+
+    public function logout_admin(Request $request)
+    {
+        /* 
+        Method ini berfungsi untuk admin pada tombol sign out
+        Untuk Custume 
+        APIConnectWithParis\vendor\filament\filament\resources\views\widgets\account-widget.blade.php 
+        */
+        try {
+            Filament::auth()->logout();
             // Hapus semua token pengguna (untuk API)
             $request->user()->tokens()->delete();
     
@@ -151,7 +184,6 @@ class AuthController extends Controller
 
     public function refresh_token(Request $request)
     {
-        // dd('test');
         DB::table('personal_access_tokens')
             ->where('tokenable_id', Auth::user()->id)
             ->where('name', 'access_token')
