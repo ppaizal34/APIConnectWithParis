@@ -81,6 +81,7 @@ class AuthController extends Controller
             'status' => false,
             'message' => 'Proses login gagal. username atau password salah'
         ], 401);
+        
         // return back()->withErrors([
         //     'error' => 'Proses login gagal. username atau password salah '
         // ]);

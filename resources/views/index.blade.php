@@ -95,89 +95,49 @@
     </header>
 
     <main>
-        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-            {{-- carousel-indicators --}}
+        <div id="carouselExampleIndicators" class="carousel slide" style="background-color: #f8f9fa; border-radius: 10px; overflow: hidden;">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Layanan API 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Layanan API 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Layanan API 3"></button>
             </div>
-
             <div class="carousel-inner">
-                {{-- carousel 1 --}}
-                <div class="carousel-item active">
-                    <img src="{{ asset('assets/images_api/5.jpg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="nation.png">
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                            <h1>Nations API</h1>
-                            <figure class="d-flex">
-                                <img src="{{ asset('assets/images_api/avatar/nation.png') }}" class="rounded-circle" alt="avatar_nation.png" width="50" height="30"> 
-                                <figcaption class="ms-3">
-                                    PENYEDIA DATA / SUMBER INFORMASI / PUSAT DATA GLOBAL
-                                </figcaption>
-                            </figure>
-                            <p>
-                               Melalui APIConnectWithParis,anda dapat mengeksplorasi data detail dan komprehensif dari berbagai negara
-                               di seluruh dunia,mulai dari populasi,ibu kota,hingga status kedaulatan dan keanggotaan global.
-                            </p>
-                            <p>
-                                <a class="btn btn-lg btn-primary" href="{{ route('doc_nations') }}">
-                                    Get Documention
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+              <!-- Slide 1 -->
+              <div class="carousel-item active text-center">
+                <img src="https://via.placeholder.com/800x300?text=File+Conversion+API" class="d-block w-100" alt="File Conversion API">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="color: #333;">File Conversion API</h5>
+                  <p style="color: #555;">Convert files seamlessly: PDF to Word, Excel, and more.</p>
                 </div>
-                {{-- carousel 2 --}}
-                <div class="carousel-item">
-                    <img src="{{ asset('assets/images_api/image.jpg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="">
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                            <h1>Images API</h1>
-                            <figure class="d-flex">
-                                <img src="{{ asset('assets/images_api/avatar/nation.png') }}" class="rounded-circle" alt="avatar_nation.png" width="50" height="30"> 
-                                <figcaption class="ms-3">
-                                    PENYEDIA DATA / SUMBER INFORMASI / PUSAT DATA GLOBAL
-                                </figcaption>
-                            </figure>
-                            <p>
-                                APIConnectWithParis menyediakan akses ke berbagai gambar dari seluruh dunia, mencakup tema alam, budaya, seni, dan lanskap kota.
-                            </p>
-                            <p>
-                                <a class="btn btn-lg btn-primary" href="#">
-                                    Get Documention
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+              </div>
+              <!-- Slide 2 -->
+              <div class="carousel-item text-center">
+                <img src="https://via.placeholder.com/800x300?text=Data+Analysis+API" class="d-block w-100" alt="Data Analysis API">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="color: #333;">Data Analysis API</h5>
+                  <p style="color: #555;">Advanced tools to analyze and visualize your data.</p>
                 </div>
-                {{-- carousel 3 --}}
-                <div class="carousel-item">
-                    <img src="{{ asset('assets/images_api/3.jpg') }}" class="img-fluid h-100 w-100" alt="...">
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                            <h1>One more for good measure.</h1>
-                            <p>Some representative placeholder content for the third slide of this carousel.</p>
-                            <p>
-                                <a class="btn btn-lg btn-primary" href="#">
-                                    Learn more
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+              </div>
+              <!-- Slide 3 -->
+              <div class="carousel-item text-center">
+                <img src="https://via.placeholder.com/800x300?text=Integration+Tools" class="d-block w-100" alt="Integration Tools">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="color: #333;">Integration Tools</h5>
+                  <p style="color: #555;">Seamlessly integrate with your favorite platforms.</p>
                 </div>
+              </div>
             </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
             </button>
-        </div>
+          </div>
+          
 
         <div class="container marketing">
             <h1 class="text-center mb-4">Layanan API Yang Tersedia</h1>

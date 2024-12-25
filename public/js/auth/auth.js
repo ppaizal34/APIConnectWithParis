@@ -30,7 +30,7 @@ $(document).ready(function () {
             $(element).removeClass("is-invalid");
         },
         submitHandler: function (form) {
-            event.preventDefault();
+            // event.preventDefault();
             const formData = new FormData(form);
 
             const loading = `<div class="spinner-border text-light" role="status">
@@ -60,7 +60,6 @@ $(document).ready(function () {
                         error_login.hide();
                     }
 
-    
                     const access_token = response.data.data.token;
                     const refresh_token = response.data.data.refresh_token;
                     const expired_access_token = response.data.data.expired_access_token;
@@ -137,7 +136,7 @@ $(document).ready(function () {
         unhighlight: function (element) {
             $(element).removeClass("is-invalid");
         },
-        submitHandler: function (form) {
+        submitHandler: function (form, event) {
             event.preventDefault();
             const formData = new FormData(form);
 
