@@ -2,22 +2,23 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\ServerMonitoring;
 use Filament\Pages;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Filament\PanelProvider;
+// use App\Filament\Pages\Dashboard;
+use Filament\Support\Colors\Color;
+use App\Filament\Pages\ServerMonitoring;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -38,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
-                ServerMonitoring::class,
+                // ServerMonitoring::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

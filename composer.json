@@ -9,7 +9,7 @@
         "dotswan/filament-laravel-pulse": "^1.1",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
-        "laravel/pulse": "^1.2",
+        "laravel/pulse": "^1.3",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",

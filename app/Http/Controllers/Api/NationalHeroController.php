@@ -11,12 +11,23 @@ class NationalHeroController extends Controller
     public function index()
     {
         $heroes = NationalHero::all()->makeHidden(['id', 'created_at', 'updated_at']);
+        // return response()->json([
+        //     'status' => 'failed',
+        //     'message' => 'Failed to retrieve data',
+        // ], 404);
+
+        // if($heroes->isEmpty()){
+        //     return response()->json([
+        //         'status' => 'failed',
+        //         'message' => 'Failed to retrieve data',
+        //     ], 404);
+        // }
 
         return response()->json([
             'status' => 'success',
             'message' => 'Heroes data retrieved successfully',
             'data' => $heroes,
-        ]);
+        ], 200);
     }
 
     public function spesifik_name(string $name)

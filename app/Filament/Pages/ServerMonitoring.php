@@ -18,22 +18,19 @@ use Filament\Pages\Page;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Facades\Filament;
 
-
-
-
 class ServerMonitoring extends Page
 {
     use HasFiltersAction;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.server-monitoring';
+    protected static string $view = 'filament-panels::pages.server-monitoring';
 
     public function getColumns(): int|string|array
     {
         return 12;
     }
- 
+    
     protected function getHeaderActions(): array
     {
         return [
@@ -52,11 +49,10 @@ class ServerMonitoring extends Page
                 ->button()
         ];
     }
- 
+
     public function getWidgets(): array
     {
         return [
-            Filament::getWidgets(),
             PulseServers::class,
             PulseCache::class,
             PulseExceptions::class,
@@ -66,5 +62,10 @@ class ServerMonitoring extends Page
             PulseSlowRequests::class,
             PulseSlowOutGoingRequests::class
         ];
+    }
+
+    public function getVisibleWidgets(): array
+    {
+        return $this->filterVisibleWidgets($this->getWidgets());
     }
 }

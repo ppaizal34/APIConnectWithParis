@@ -6,16 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- Title --}}
     <title>API Documentation |Indonesian national hero</title>
-    {{-- CDN axios --}}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    {{-- CDN jquery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     {{-- CDN Icons Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- CDN CSS Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- CSS Custom --}}
     <link href="{{ asset('css/style_nations.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <!-- Modal Alert Jika masa aktif Access Token Sudah Habis -->
     @auth
@@ -281,7 +279,7 @@
                                             placeholder="Enter Bearer Token" required style="cursor: pointer">
                                         <span id="clear_token"
                                             class="position-absolute top-50 translate-middle-y end-0 me-3"
-                                            style="cursor: pointer; display: none;">
+                                            style="cursor: pointer;">
                                             <i class="bi bi-x-circle"></i>
                                         </span>
                                     </td>
@@ -290,7 +288,7 @@
                             </tbody>
                         </table>
 
-                        <button id="btn_test_token" class="btn btn-danger mb-3" disabled>
+                        <button id="btn_test_token" class="btn btn-danger mb-3">
                             Try out
                         </button>
                     </div>
@@ -302,10 +300,11 @@
     {{-- CDN Script JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Script Nations JS --}}
-    <script src="{{ asset('js/api/national_hero.js') }}"></script>
+    <script type="module" src="{{ asset('js/api/national_hero.js') }}"></script>
     {{-- Script check-token-expiry JS --}}
     <script src="{{ asset('js/token/check-token-expiry.js') }}"></script>
     {{-- Script check-refreshtoken-expiry JS --}}
     <script src="{{ asset('js/token/check-refreshtoken-expiry.js') }}"></script>
 </body>
+
 </html>

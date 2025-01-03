@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- Title --}}
     <title>API Documentation | Countries</title>
-    {{-- CDN axios --}}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    {{-- CDN jquery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     {{-- CDN Icons Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- CDN CSS Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- CSS Custom --}}
     <link href="{{ asset('css/style_nations.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -306,7 +303,7 @@
     {{-- CDN Script JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Script Nations JS --}}
-    <script src="{{ asset('js/api/nations.js') }}"></script>
+    <script type="module" src="{{ asset('js/api/nations.js') }}"></script>
     {{-- Script check-token-expiry JS --}}
     <script src="{{ asset('js/token/check-token-expiry.js') }}"></script>
     {{-- Script check-refreshtoken-expiry JS --}}
